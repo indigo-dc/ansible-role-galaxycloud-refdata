@@ -1,0 +1,9 @@
+---
+- name: Restart Galaxy
+  command: "galaxy-restart"
+  ignore_errors: yes
+  become_user: root
+  become_method: sudo
+
+- name: Wait Galaxy is up
+  include: check-galaxy-instance.yml

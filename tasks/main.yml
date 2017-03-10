@@ -1,0 +1,12 @@
+---
+# Add a fast check to speed reconfiguration
+- stat: path=/usr/bin/galaxy-startup
+  register: galaxy_installed
+
+- name: Wait Galaxy is up
+  include: check-galaxy-instance.yml
+  when: galaxy_installed.stat.exists
+
+- name: Configure Reference Data
+  include: install.yml
+  when: galaxy_installed.stat.exists

@@ -1,0 +1,24 @@
+---
+- name: Create tool_data_conf.xml file
+  copy: src={{galaxy_config_path}}/tool_data_table_conf.xml.sample dest={{galaxy_config_path}}/tool_data_table_conf.xml remote_src=true
+
+- name: set fact  
+  set_fact:
+    contents: "{{ lookup('template', 'add_tool_data_table_conf.xml.j2') }}"
+
+- name: Add Reference Genome to tool_data_table_conf.xml
+  blockinfile:
+    dest: "{{galaxy_config_path}}/tool_data_table_conf.xml"
+    marker: "<!-- {mark} ELIXIR-ITA customization-->"
+    insertbefore: "</tables>"
+    block: "{{contents}}"
+  notify:
+    - restart galaxy
+
+- name: Add loc files
+  template: src={{ item.j2_file }} dest={{galaxy_tool_data_table_conf_path}}/{{ item.loc_file }}
+  with_items:
+    - { j2_file: "bowtie_indices.loc.j2", loc_file: "bowtie_indices.loc" }
+    - { j2_file: "fasta_indexes.loc.j2", loc_file: "fasta_indexes.loc" }
+  notify:
+    - restart galaxy

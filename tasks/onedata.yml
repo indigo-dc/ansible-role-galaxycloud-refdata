@@ -1,0 +1,9 @@
+---
+- name: Copy compare.py script
+  template: src=connect.sh.j2 dest=/usr/local/bin/fetch_refdata.sh mode=a+x
+  become_user: root
+  become_method: sudo
+
+- name: Connect to ONEDATA Reference Data space
+  shell: './connect.sh > {{ refdata_log_path }}/refdata_connection.log'
+  ignore_errors: true

@@ -1,0 +1,19 @@
+---
+- name: Create/invoke script virtualenv
+  pip: name={{ item }} virtualenv={{ galaxy_tools_base_dir }}/venv virtualenv_command="{{ pip_virtualenv_command | default( 'virtualenv' ) }}"
+  with_items:
+    - ephemeris==0.4.0
+
+- name: Get installed tool list
+  command: '{{ galaxy_tools_base_dir }}/venv/bin/get-tool-list -g {{ galaxy_instance_url }} -o /tmp/galaxy-installed-tool-list.yml'
+
+- name: Get Galaxy flavor tool list
+  get_url: url=https://raw.githubusercontent.com/indigo-dc/Galaxy-flavors-recipes/master/galaxy-flavors/{{ galaxy_flavor }}-tool-list.yml dest=/tmp
+
+- name: Copy compare.py script
+  template: src=compare.py.j2 dest=/tmp/compare.py
+
+- name: Get missing tool list
+  command: '{{galaxy_venv_path}}/bin/python /tmp/compare.py -f /tmp/{{ galaxy_flavor }}-tool-list.yml -i /tmp/galaxy-installed-tool-list.yml -o /tmp/galaxy-missing-tool-list.yml'
+  environment:
+    VIRTUAL_ENV: "{{galaxy_venv_path}}"

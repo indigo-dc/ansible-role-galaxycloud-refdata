@@ -1,0 +1,8 @@
+#!/bin/bash
+
+export ONECLIENT_AUTHORIZATION_TOKEN={{ refdata_onedata_token }}
+
+export PROVIDER_HOSTNAME={{ oneprovider_url }}
+
+oneclient --authentication token {{ refdata_dir }}
+~                                         

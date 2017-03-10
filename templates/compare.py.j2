@@ -1,0 +1,74 @@
+'''
+comments
+e-mail: ma.tangaro@ibbe.cnr.it
+'''
+
+import yaml
+import argparse
+import sys
+
+def parse_cli_options():
+  parser = argparse.ArgumentParser(description='Download Reference Data', formatter_class=argparse.RawTextHelpFormatter)
+  parser.add_argument( '-i', dest='galaxy_instance_tool_list', help='')
+  parser.add_argument( '-f', dest='galaxy_flavor_tool_list', help='')
+  parser.add_argument( '-o', dest='output', default='/tmp/galaxy-missing-tool-list.yml', help='')
+  return parser.parse_args()
+
+def load_input_file(refdata_list_file = "list.yml"):
+  with open(refdata_list_file, 'r') as fi:
+    li = yaml.load(fi)
+  return li
+
+def compare_dict(dict1, dict2):
+    
+    #print yaml.dump(dict1, default_flow_style=False)
+    #print yaml.dump(dict2, default_flow_style=False)
+    sys.stdout.write('---\n')
+    sys.stdout.write('# The following tools has not been automatically installed.\n')
+    sys.stdout.write('# Missing tools:\n\n')
+    sys.stdout.write( 'tools: \n')
+    
+    for i in dict1['tools']:
+        temp = 0
+        for j in dict2['tools']:
+            if (i['name'] == j['name']) and i['owner'] == j['owner']:
+                temp = 1
+                continue
+        if ( temp == 0 ):
+            sys.stdout.write( '  - name: ' + i['name'] +'\n')
+            sys.stdout.write( '    owner: ' + i['owner'] +'\n')
+            # Search for section label
+            try:
+                label = i['tool_panel_section_label']
+                sys.stdout.write( '    tool_panel_section_label: ' + i['tool_panel_section_label'] +'\n')
+            except (KeyError):
+                pass
+            # Search for section id
+            try:
+                section_id = i['tool_panel_section_id']
+                sys.stdout.write( '    tool_panel_section_id: ' + i['tool_panel_section_id'] +'\n')
+            except (KeyError):
+                pass
+            sys.stdout.write('\n')
+
+def compare():
+    
+    options = parse_cli_options()
+
+    #---
+    # Get Galaxy flavor tools list (expected tools)
+    flavor_dict = load_input_file(options.galaxy_flavor_tool_list)
+    
+    # Get Galaxy instance tools list (installed tools)
+    instance_list = load_input_file(options.galaxy_instance_tool_list)
+    
+    fout = open(options.output,'w')
+    
+    sys.stdout = fout
+
+    compare_dict(flavor_dict, instance_list)
+    
+    fout.close()
+
+if __name__ == "__main__":
+  compare()

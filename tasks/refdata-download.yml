@@ -1,0 +1,26 @@
+---
+- name: Create refdata directory
+  file:
+    path: '{{ refdata_dir }}/{{ refdata_onedata_space_name }}' # consistency with onedata space name
+    state: directory
+    owner: '{{ galaxy_user }}'
+    group: '{{ galaxy_user }}'
+  become_user: root
+  become_method: sudo
+
+- name: Copy ref_data_download.py
+  template: src=refdata_download.py.j2 dest=/tmp/refdata_download.py mode=a+x
+
+- name: Copy genome lists
+  copy: src="{{item}}" dest="{{galaxy_refdata_list_path}}"
+  with_items:
+    - sacCer3-list.yml
+    #- hg19-list.yml
+
+- name: Download reference data
+  command: '{{galaxy_venv_path}}/bin/python /tmp/refdata_download.py -i {{galaxy_refdata_list_path}}/{{item}}'
+  environment:
+    VIRTUAL_ENV: "{{galaxy_venv_path}}"
+  with_items:
+    - "sacCer3-list.yml"
+    #- "hg19-list.yml"

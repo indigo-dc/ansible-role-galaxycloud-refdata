@@ -1,0 +1,53 @@
+---
+genomes:
+  - genome: 'sacCer3'
+    tools:
+      - tool: 'bowtie-index'
+        parts:
+          - part: 'sacCer3.1.ebwt'
+          - part: 'sacCer3.2.ebwt'
+          - part: 'sacCer3.3.ebwt'
+          - part: 'sacCer3.4.ebwt'
+          - part: 'sacCer3.rev.1.ebwt'
+          - part: 'sacCer3.rev.2.ebwt'
+      - tool: 'bowtie2'
+        parts:
+          - part: 'genome.1.bt2'
+          - part: 'genome.2.bt2'
+          - part: 'genome.3.bt2'
+          - part: 'genome.4.bt2'
+          - part: 'genome.rev.1.bt2'
+          - part: 'genome.rev.2.bt2'
+      - tool: 'bwa_index'
+        parts:
+          - part: 'sacCer3.fa'
+          - part: 'sacCer3.fa.amb'
+          - part: 'sacCer3.fa.ann'
+          - part: 'sacCer3.fa.bwt'
+          - part: 'sacCer3.fa.pac'
+          - part: 'sacCer3.fa.rbwt'
+          - part: 'sacCer3.fa.rpac'
+          - part: 'sacCer3.fa.rsa'
+          - part: 'sacCer3.fa.sa'
+      - tool: 'liftover'
+        parts:
+          - part: 'sacCer3ToSacCer2.over.chain'
+      - tool: 'rsem'
+        parts:
+          - part: 'SacCer3.1.ebwt'
+          - part: 'SacCer3.2.ebwt'
+          - part: 'SacCer3.3.ebwt'
+          - part: 'SacCer3.4.ebwt'
+          - part: 'SacCer3.chrlist'
+          - part: 'SacCer3.grp'
+          - part: 'SacCer3.idx.fa'
+          - part: 'SacCer3.rev.1.ebwt'
+          - part: 'SacCer3.rev.2.ebwt'
+          - part: 'SacCer3.seq'
+          - part: 'SacCer3.ti'
+          - part: 'SacCer3.transcripts.fa'
+          - part: 'yeast_sgdGenes.gtf'
+    others:
+      - other: 'genome.fa'
+      - other: 'genome.fa.fai'
+      - other: 'sacCer3.2bit'

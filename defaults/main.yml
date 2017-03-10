@@ -1,0 +1,91 @@
+---
+# defaults file for ansible-role-galaxycloud-refdata
+
+#######################
+# Galaxy instance
+galaxy_instance_url: "http://{{ansible_default_ipv4.address}}/galaxy/"
+
+# A list of yml files that list the reference data to be installed.
+refdata_download: "true"
+galaxy_refdata_list_files: [ "refdata_list.yaml" ]
+
+#######################
+# Galaxy info same as indigo-dc.galaxycloud ansible role
+
+# User to launch the Galaxy portal
+galaxy_user: galaxy
+
+# Galaxy user UID
+GALAXY_UID: "4001"
+
+# Path to install the Galaxy software
+galaxy_FS_path: /home/galaxy
+
+# Galaxy directory (usually galaxy or galaxy-dist)
+galaxy_directory: galaxy
+
+# Galaxy install path
+galaxy_install_path: "{{galaxy_FS_path}}/{{galaxy_directory}}"
+
+# Virtualenv directory
+galaxy_venv_path: "{{galaxy_install_path}}/.venv"
+
+# Galaxy config/galaxy.ini path
+galaxy_config_path: "{{galaxy_install_path}}/config"
+galaxy_config_file: "{{galaxy_config_path}}/galaxy.ini"
+
+# Galaxy flavor
+galaxy_flavor: "galaxy-no-tools"
+
+#######################
+# Configuration
+
+get_refdata_from_onedata: true
+
+get_refdata_from_swift_storage: false  # This should be false by default. Use OneData
+
+#######################
+# OneData configuration
+
+oneprovider_url: "cdmi-indigo.recas.ba.infn.it"
+
+refdata_onedata_token: "MDAxNWxvY2F00aW9uIG9uZXpvbmUKMDAzYmlkZW500aWZpZXIgbVVfYjRpZUt4WGZtbVBWMG0000QjhURzNPUEJhdVJFS3NybGduU00ZGYWkwbwowMDFhY2lkIHRpbWUgPCAxNTEzOTQxMjc3CjAwMmZzaWduYXR1cmUgNZ00sfBXZuuS3Q7I00A02qNe4rWw6lAWPJdYpor46u6Q7AK"
+
+refdata_onedata_space_name: "galaxy_reference_data"
+
+#######################
+# Path
+
+#---
+# Ephemeris
+galaxy_tools_base_dir: "/tmp"
+
+#---
+# Path
+refdata_dir: "/refdata"
+
+galaxy_refdata_list_path: "/tmp"
+
+galaxy_tool_data_table_conf_path: "{{galaxy_install_path}}/tool-data"
+
+refdata_log_path: "/var/log/refdata"
+
+#---
+# Genome http address (INDIGO_CNR ReCaS Bari Swift container)
+refdata_swift_storage_url: "http://cloud.recas.ba.infn.it:8080/v1/AUTH_3b4918e0a982493e8c3ebcc43586a2a8/test_ref"
+
+#---
+# Genome
+at10: "false" # A. thaliana (TAIR 10)
+at9: "false" # A. thaliana (TAIR 9)
+dm2: "false" # D. melanogaster (dm2)
+dm3: "false" # D. melanogaster (dm3)
+hg18: "false" # H. sapiens (hg18)
+hg19: "false" # H. sapiens (hg19)
+hg38: "false" # H. sapeins (hg38)
+mm10: "false" # M. musculus (mm10)
+mm8: "false" # M. musculus (mm9)
+mm9: "false" # M. musculus (mm8)
+sacCer1: "false" # S. cerevisiae (sacCer1)
+sacCer2: "false" # S. cerevisiae (sacCer2)
+sacCer3: "true" # S. cerevisiae (sacCer3)
