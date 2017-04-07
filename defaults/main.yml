@@ -40,9 +40,11 @@ galaxy_flavor: "galaxy-no-tools"
 #######################
 # Configuration
 
-get_refdata_from_onedata: true
+get_refdata: true
 
-get_refdata_from_swift_storage: false  # This should be false by default. Use OneData
+get_refdata_from_onedata: false
+
+get_refdata_from_swift_storage: true  # This should be false by default. Use OneData
 
 #######################
 # OneData configuration

@@ -7,6 +7,6 @@
   include: check-galaxy-instance.yml
   when: galaxy_installed.stat.exists
 
-- name: Configure Reference Data
+- name: Install and Configure Reference Data
   include: install.yml
-  when: galaxy_installed.stat.exists
+  when: galaxy_installed.stat.exists and get_refdata
