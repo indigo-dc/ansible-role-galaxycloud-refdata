@@ -1,6 +1,13 @@
 ---
 # defaults file for ansible-role-galaxycloud-refdata
 
+get_refdata: true
+
+get_refdata_from_onedata: false
+
+get_refdata_from_swift_storage: true  # This should be false by default. Use OneData
+
+
 #######################
 # Galaxy instance
 galaxy_instance_url: "http://{{ansible_default_ipv4.address}}/galaxy/"
@@ -10,7 +17,8 @@ refdata_download: "true"
 galaxy_refdata_list_files: [ "refdata_list.yaml" ]
 
 #######################
-# Galaxy info same as indigo-dc.galaxycloud ansible role
+# Galaxy info 
+# imported from indigo-dc.galaxycloud ansible role
 
 # User to launch the Galaxy portal
 galaxy_user: galaxy
@@ -36,15 +44,6 @@ galaxy_config_file: "{{galaxy_config_path}}/galaxy.ini"
 
 # Galaxy flavor
 galaxy_flavor: "galaxy-no-tools"
-
-#######################
-# Configuration
-
-get_refdata: true
-
-get_refdata_from_onedata: false
-
-get_refdata_from_swift_storage: true  # This should be false by default. Use OneData
 
 #######################
 # OneData configuration
