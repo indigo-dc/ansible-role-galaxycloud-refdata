@@ -10,9 +10,13 @@
 
 - name: Copy ref_data_download.py
   template: src=refdata_download.py.j2 dest=/tmp/refdata_download.py mode=a+x
+  become_user: root
+  become_method: sudo
 
 - name: Copy genome lists
-  copy: src="{{item}}" dest="{{galaxy_refdata_list_path}}"
+  copy: 
+    src: "{{ item }}"
+    dest: "{{ galaxy_refdata_list_path }}"
   with_items:
     - sacCer3-list.yml
     #- hg19-list.yml

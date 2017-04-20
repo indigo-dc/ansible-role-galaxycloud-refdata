@@ -1,5 +1,7 @@
 ---
 - include: prerequisites.yml
+  become_user: "{{ galaxy_user }}"
+  become: true
 
 - name: Get installed tools list
   include: get-missing-tools-list.yml
