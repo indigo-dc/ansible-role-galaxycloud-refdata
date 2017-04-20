@@ -4,14 +4,22 @@
 - name: Get installed tools list
   include: get-missing-tools-list.yml
   when: galaxy_flavor != "galaxy-no-tools"
+  become_user: "{{ galaxy_user }}"
+  become: true
 
 - name: Mount ONEDATA Reference Data Space
   include: onedata.yml
   when: get_refdata_from_onedata
+  become_user: "{{ galaxy_user }}"
+  become: true
 
 - name: Download Reference Data
   include: refdata-download.yml
   when: get_refdata_from_swift_storage
+  become_user: "{{ galaxy_user }}"
+  become: true
 
 - name: Let Galaxy be aware of reference data
   include: locs.yml
+  become_user: "{{ galaxy_user }}"
+  become: true
