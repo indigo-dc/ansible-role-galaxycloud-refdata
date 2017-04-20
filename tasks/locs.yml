@@ -16,7 +16,10 @@
     - restart galaxy
 
 - name: Add loc files
-  template: src={{ item.j2_file }} dest={{galaxy_tool_data_table_conf_path}}/{{ item.loc_file }}
+  template:
+    src: "{{ item.j2_file }}"
+    dest: "{{ galaxy_tool_data_table_conf_path }}/{{ item.loc_file }}"
+    force: yes
   with_items:
     - { j2_file: "bowtie_indices.loc.j2", loc_file: "bowtie_indices.loc" }
     - { j2_file: "fasta_indexes.loc.j2", loc_file: "fasta_indexes.loc" }
