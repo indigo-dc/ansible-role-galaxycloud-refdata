@@ -20,5 +20,6 @@
   with_items:
     - { j2_file: "bowtie_indices.loc.j2", loc_file: "bowtie_indices.loc" }
     - { j2_file: "fasta_indexes.loc.j2", loc_file: "fasta_indexes.loc" }
+    - { j2_file: "liftOver.loc.j2", loc_file: "liftOver.loc" }
   notify:
     - restart galaxy
