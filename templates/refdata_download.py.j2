@@ -7,6 +7,7 @@ import argparse
 import yaml
 import urllib2
 import logging
+import pycurl
 
 REFDATA_ROOT_DIR="{{ refdata_dir }}/{{ refdata_onedata_space_name }}"
 GALAXY_USER="{{ galaxy_user }}"
@@ -31,20 +32,17 @@ def create_dir(dirpath = 'directory_path'):
     os.makedirs(dirpath)
 
 def write_data(name, url):
-  print 'Downloading: ' + url
-  response = urllib2.urlopen(url)
-  data = response.read()
-  with open(name, "wb") as code:
-    code.write(data)
-
-def write_data(name, url):
   out = 'Downloading: ' + url
   logging.debug(out)
   try: 
     response = urllib2.urlopen(url)
-    data = response.read()
-    with open(name, "wb") as code:
-      code.write(data)
+    with open(name, "wb") as fp:
+      curl = pycurl.Curl()
+      curl.setopt(pycurl.URL, url)
+      curl.setopt(pycurl.WRITEDATA, fp)
+      curl.perform()
+      curl.close()
+      fp.close()
   except (urllib2.HTTPError):
     logging.debug('WARNING: Reference Genome NOT FOUND. SKIPPING!!!')
     pass

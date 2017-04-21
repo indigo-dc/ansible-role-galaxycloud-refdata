@@ -1,0 +1,12 @@
+---
+genomes:
+  - genome: 'hg19'
+    tools:
+      - tool: 'liftover'
+        parts:
+          - part: 'hg19ToHg18.over.chain'
+          - part: 'hg19ToHg38.over.chain'
+          - part: 'hg19ToMm10.over.chain'
+          - part: 'hg19ToMm9.over.chain'
+    others:
+      - other: 'genome.fa.fai'
