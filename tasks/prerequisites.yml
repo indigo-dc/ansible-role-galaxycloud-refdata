@@ -9,5 +9,6 @@
   with_items:
     - '{{ refdata_log_path }}'
     - '{{ refdata_dir }}'
+    - '{{ tools_log_path }}'
   become_user: root
   become_method: sudo
