@@ -71,6 +71,8 @@ galaxy_tool_data_table_conf_path: "{{galaxy_install_path}}/tool-data"
 
 refdata_log_path: "/var/log/refdata" # WARNING: keep refdata_log_path and refdata_dir with different path, otherwise by mounting onedata space you loose log files!
 
+missing_tools_log_path: "/tmp/missing_tools_log"
+
 #---
 # Genome http address (INDIGO_CNR ReCaS Bari Swift container)
 refdata_swift_storage_url: "http://cloud.recas.ba.infn.it:8080/v1/AUTH_3b4918e0a982493e8c3ebcc43586a2a8/test_ref"
