@@ -2,13 +2,14 @@
 # Create directories for reference data and logs
 
 - name: Create directories
-  file: path={{ item }}
-        state=directory
-        owner={{ galaxy_user }}
-        group={{ galaxy_user }}
+  file:
+    path: "{{ item }}"
+    state: directory
+    owner: "{{ galaxy_user }}"
+    group: "{{ galaxy_user }}"
   with_items:
     - '{{ refdata_log_path }}'
     - '{{ refdata_dir }}'
-    - '{{ tools_log_path }}'
+    - '{{ missing_tools_log_path }}'
   become_user: root
   become_method: sudo
