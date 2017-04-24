@@ -3,3 +3,4 @@
 
 - name: restart galaxy
   include: galaxy_restart.yml
+  static: no # This is a workaround for https://github.com/ansible/ansible/issues/18178
