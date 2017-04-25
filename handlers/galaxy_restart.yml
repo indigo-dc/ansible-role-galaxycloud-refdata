@@ -5,6 +5,15 @@
   become_user: root
   become_method: sudo
 
-- name: Wait Galaxy is up
-  include: check-galaxy-instance.yml
-  #static: no # This is a temporary workaround for https://github.com/ansible/ansible/issues/18178 
+# This is a temporary commented out for this bug on ansible 2.2.x.x series:
+# for https://github.com/ansible/ansible/issues/18178 
+# causing multiple restarting. It will be replaced by a new script for restart later on.
+#- name: Wait Galaxy is up
+#  include: check-galaxy-instance.yml
+
+- name: Check if Galaxy is up
+  uri: url="{{ galaxy_instance_url }}"
+  register: result
+  until: result.status == 200
+  retries: 30
+  delay: 10
