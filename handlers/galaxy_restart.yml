@@ -6,5 +6,5 @@
   become_method: sudo
 
 - name: Wait Galaxy is up
-  include: tasks/check-galaxy-instance.yml
-  static: no # This is a temporary workaround for https://github.com/ansible/ansible/issues/18178 
+  include: check-galaxy-instance.yml
+  #static: no # This is a temporary workaround for https://github.com/ansible/ansible/issues/18178 
