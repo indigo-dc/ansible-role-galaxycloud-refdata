@@ -6,4 +6,5 @@
   become_method: sudo
 
 - name: Wait Galaxy is up
-  include: check-galaxy-instance.yml
+  include: tasks/check-galaxy-instance.yml
+  static: no 
