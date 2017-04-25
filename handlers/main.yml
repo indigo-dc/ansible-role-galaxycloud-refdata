@@ -2,5 +2,5 @@
 # handlers file for ansible-role-galaxycloud-refdata
 
 - name: restart galaxy
-  include: tasks/galaxy_restart.yml
-  static: no # This is a workaround for https://github.com/ansible/ansible/issues/18178
+  include: galaxy_restart.yml
+  #static: no # This is a workaround for https://github.com/ansible/ansible/issues/18178
