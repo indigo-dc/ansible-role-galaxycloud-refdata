@@ -7,4 +7,4 @@
 
 - name: Wait Galaxy is up
   include: tasks/check-galaxy-instance.yml
-  static: no 
+  static: no # This is a temporary workaround for https://github.com/ansible/ansible/issues/18178 
