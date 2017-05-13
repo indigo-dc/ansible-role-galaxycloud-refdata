@@ -1,0 +1,52 @@
+---
+genomes:
+  - genome: 'dm3'
+    tools:
+      - tool: 'bowtie-index'
+        parts:
+          - part: 'dm3.1.ebwt'
+          - part: 'dm3.2.ebwt'
+          - part: 'dm3.3.ebwt'
+          - part: 'dm3.4.ebwt'
+          - part: 'dm3.rev.1.ebwt'
+          - part: 'dm3.rev.2.ebwt'
+      - tool: 'bowtie2'
+        parts:
+          - part: 'genome.1.bt2'
+          - part: 'genome.2.bt2'
+          - part: 'genome.3.bt2'
+          - part: 'genome.4.bt2'
+          - part: 'genome.rev.1.bt2'
+          - part: 'genome.rev.2.bt2'
+      - tool: 'bwa_index'
+        parts:
+          - part: 'dm3.fa.amb'
+          - part: 'dm3.fa.ann'
+          - part: 'dm3.fa.bwt'
+          - part: 'dm3.fa.fai'
+          - part: 'dm3.fa.pac'
+          - part: 'dm3.fa.rbwt'
+          - part: 'dm3.fa.rpac'
+          - part: 'dm3.fa.rsa'
+          - part: 'dm3.fa.sa'
+      - tool: 'liftover'
+        parts:
+          - part: 'dm3ToDm2.over.chain'
+      - tool: 'rsem'
+        parts:
+          - part: 'dm3.1.ebwt'
+          - part: 'dm3.2.ebwt'
+          - part: 'dm3.3.ebwt'
+          - part: 'dm3.4.ebwt'
+          - part: 'dm3.chrlist'
+          - part: 'dm3.grp'
+          - part: 'dm3.idx.fa'
+          - part: 'dm3.rev.1.ebwt'
+          - part: 'dm3.rev.2.ebwt'
+          - part: 'dm3.seq'
+          - part: 'dm3.ti'	
+          - part: 'dm3.transcripts.fa'
+    others:
+      - other: 'genome.fa'
+      - other: 'genome.fa.fai'
+      - other: 'dm3.2bit'
