@@ -3,11 +3,11 @@
 
 get_refdata: true
 
-get_refdata_from_onedata: false
+onedata_repository: false
 
-get_refdata_from_cvmfs: false
+cvmfs_repository: false
 
-get_refdata_from_swift_storage: true  # This should be false by default. Use OneData
+download: true  # This should be false by default. Use OneData
 
 
 #######################

@@ -11,13 +11,13 @@
 
 - name: Mount ONEDATA Reference Data Space
   include: onedata.yml
-  when: get_refdata_from_onedata
+  when: onedata_repository
   become_user: "{{ galaxy_user }}"
   become: true
 
 - name: Download Reference Data
   include: refdata-download.yml
-  when: get_refdata_from_swift_storage
+  when: download
   become_user: "{{ galaxy_user }}"
   become: true
 

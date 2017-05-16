@@ -9,8 +9,8 @@
     group: "{{ galaxy_user }}"
   become_user: root
   become_method: sudo
-  when: get_refdata_from_onedata|bool or get_refdata_from_cvmfs|bool
-
+  when: download|bool
+ 
 - name: Create directories
   file:
     path: "{{ item }}"
