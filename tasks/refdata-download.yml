@@ -43,7 +43,8 @@
     - { list: "dm2-list.yml", flag: "{{ dm2 }}" }
     - { list: "dm3-list.yml", flag: "{{ dm3 }}" }
     - { list: "hg18-list.yml", flag: "{{ hg18 }}" }
-    - { list: "hg19-list.liftover.yml", flag: "{{ hg19 }}" } # FIXME replace with hg19-list.yml
+    - { list: "hg19-list.yml", flag: "{{ hg19 }}" } # FIXME replace with hg19-list.yml
+    #- { list: "hg19-list.liftover.yml", flag: "{{ hg19 }}" } # FIXME replace with hg19-list.yml
     - { list: "hg38-list.yml", flag: "{{ hg38 }}" }
     - { list: "mm8-list.yml", flag: "{{ mm8 }}" }
     - { list: "mm9-list.yml", flag: "{{ mm9 }}" }
@@ -61,7 +62,8 @@
     - { list: "dm2-list.yml", flag: "{{ dm2 }}" }
     - { list: "dm3-list.yml", flag: "{{ dm3 }}" }
     - { list: "hg18-list.yml", flag: "{{ hg18 }}" }
-    - { list: "hg19-list.liftover.yml", flag: "{{ hg19 }}" }  # FIXME replace with hg19-list.yml
+    - { list: "hg19-list.yml", flag: "{{ hg19 }}" }  # FIXME replace with hg19-list.yml
+    #- { list: "hg19-list.liftover.yml", flag: "{{ hg19 }}" }  # FIXME replace with hg19-list.yml
     - { list: "hg38-list.yml", flag: "{{ hg38 }}" }
     - { list: "mm8-list.yml", flag: "{{ mm8 }}" }
     - { list: "mm9-list.yml", flag: "{{ mm9 }}" }

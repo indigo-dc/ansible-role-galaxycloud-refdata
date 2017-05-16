@@ -35,14 +35,14 @@ galaxy_FS_path: /home/galaxy
 galaxy_directory: galaxy
 
 # Galaxy install path
-galaxy_install_path: "{{galaxy_FS_path}}/{{galaxy_directory}}"
+galaxy_install_path: "{{ galaxy_FS_path }}/{{ galaxy_directory }}"
 
 # Virtualenv directory
-galaxy_venv_path: "{{galaxy_install_path}}/.venv"
+galaxy_venv_path: "{{ galaxy_install_path }}/.venv"
 
 # Galaxy config/galaxy.ini path
-galaxy_config_path: "{{galaxy_install_path}}/config"
-galaxy_config_file: "{{galaxy_config_path}}/galaxy.ini"
+galaxy_config_path: "{{ galaxy_install_path }}/config"
+galaxy_config_file: "{{ galaxy_config_path }}/galaxy.ini"
 
 # Galaxy flavor
 galaxy_flavor: "galaxy-no-tools"
@@ -50,11 +50,11 @@ galaxy_flavor: "galaxy-no-tools"
 #######################
 # OneData configuration
 
-oneprovider_url: "cdmi-indigo.recas.ba.infn.it"
+refdata_provider: 'oneprovider2.cloud.ba.infn.it'
 
-refdata_onedata_token: "MDAxNWxvY2F00aW9uIG9uZXpvbmUKMDAzYmlkZW500aWZpZXIgbVVfYjRpZUt4WGZtbVBWMG0000QjhURzNPUEJhdVJFS3NybGduU00ZGYWkwbwowMDFhY2lkIHRpbWUgPCAxNTEzOTQxMjc3CjAwMmZzaWduYXR1cmUgNZ00sfBXZuuS3Q7I00A02qNe4rWw6lAWPJdYpor46u6Q7AK"
+refdata_token: 'MDAxNWxvY2F00aW9uIG9uZXpvbmUKMDAzYmlkZW500aWZpZXIgeExqMi00xdFN3YVp1VWIxM1dFSzRoNEdkb2x3cXVwTnpSaGZONXJSN2tZUQowMDFhY2lkIHRpbWUgPCAxNTI1MzM00NzgyCjAwMmZzaWduYXR1cmUgIOzeMtypO75nZvPJdAocInNbgH9zvJi6ifgXDrFVCr00K'
 
-refdata_onedata_space_name: "galaxy_reference_data"
+refdata_space: 'elixir-italy.galaxy.refdata'
 
 #######################
 # Path
