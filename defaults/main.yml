@@ -5,6 +5,8 @@ get_refdata: true
 
 get_refdata_from_onedata: false
 
+get_refdata_from_cvmfs: false
+
 get_refdata_from_swift_storage: true  # This should be false by default. Use OneData
 
 

@@ -1,6 +1,16 @@
 ---
 # Create directories for reference data and logs
 
+- name: Create reference data directory
+  file:
+    path: "{{ refdata_dir }}"
+    state: directory
+    owner: "{{ galaxy_user }}"
+    group: "{{ galaxy_user }}"
+  become_user: root
+  become_method: sudo
+  when: get_refdata_from_onedata|bool or get_refdata_from_cvmfs|bool
+
 - name: Create directories
   file:
     path: "{{ item }}"
@@ -9,7 +19,6 @@
     group: "{{ galaxy_user }}"
   with_items:
     - '{{ refdata_log_path }}'
-    - '{{ refdata_dir }}'
     - '{{ missing_tools_log_path }}'
   become_user: root
   become_method: sudo
