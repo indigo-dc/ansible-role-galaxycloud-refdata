@@ -1,0 +1,30 @@
+---
+genomes:
+  - genome: 'at9'
+    tools:
+      - tool: 'bowtie-index'
+        parts:
+          - part: 'genome.1.ebwt'
+          - part: 'genome.2.ebwt'
+          - part: 'genome.3.ebwt'
+          - part: 'genome.4.ebwt'
+          - part: 'genome.rev.1.ebwt'
+          - part: 'genome.rev.2.ebwt'
+      - tool: 'bowtie2'
+        parts:
+          - part: 'genome.1.bt2'
+          - part: 'genome.2.bt2'
+          - part: 'genome.3.bt2'
+          - part: 'genome.4.bt2'
+          - part: 'genome.rev.1.bt2'
+          - part: 'genome.rev.2.bt2'
+      - tool: 'bwa_index'
+        parts:
+          - part: 'genome.fa.amb'
+          - part: 'genome.fa.ann'
+          - part: 'genome.fa.bwt'
+          - part: 'genome.fa.pac'
+          - part: 'genome.fa.sa'
+    others:
+      - other: 'genome.fa'
+      - other: 'genome.fa.fai'

@@ -1,0 +1,9 @@
+---
+genomes:
+  - genome: 'mm8'
+    tools:
+      - tool: 'liftover'
+        parts:
+          - part: 'mm8ToHg18.over.chain'
+          - part: 'mm8ToMm10.over.chain'
+          - part: 'mm8ToMm9.over.chain'

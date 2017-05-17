@@ -44,7 +44,7 @@ genomes:
           - part: 'dm3.rev.1.ebwt'
           - part: 'dm3.rev.2.ebwt'
           - part: 'dm3.seq'
-          - part: 'dm3.ti'	
+          - part: 'dm3.ti'
           - part: 'dm3.transcripts.fa'
     others:
       - other: 'genome.fa'

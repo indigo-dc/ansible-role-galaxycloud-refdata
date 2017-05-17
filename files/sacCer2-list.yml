@@ -1,0 +1,7 @@
+---
+genomes:
+  - genome: 'sacCer2'
+    tools:
+      - tool: 'liftover'
+        parts:
+          - part: 'sacCer2ToSacCer3.over.chain'

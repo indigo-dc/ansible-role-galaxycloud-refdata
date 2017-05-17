@@ -45,7 +45,7 @@ genomes:
           - part: 'hg38.rev.1.ebwt'
           - part: 'hg38.rev.2.ebwt'
           - part: 'hg38.seq'
-          - part: 'hg38.ti'	
+          - part: 'hg38.ti'
           - part: 'hg38.transcripts.fa'
           - part: 'hg38_gene_to_tr.txt'
     others:
