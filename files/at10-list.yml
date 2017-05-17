@@ -27,4 +27,4 @@ genomes:
           - part: 'genome.fa.sa'
     others:
       - other: 'genome.fa'
-      - other: 'genome.fa.fai'
+      - other: 'genome.2bit'
