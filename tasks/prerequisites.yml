@@ -1,16 +1,6 @@
 ---
 # Create directories for reference data and logs
 
-- name: Create reference data directory
-  file:
-    path: "{{ refdata_dir }}"
-    state: directory
-    owner: "{{ galaxy_user }}"
-    group: "{{ galaxy_user }}"
-  become_user: root
-  become_method: sudo
-  when: download|bool
- 
 - name: Create directories
   file:
     path: "{{ item }}"
@@ -18,6 +8,7 @@
     owner: "{{ galaxy_user }}"
     group: "{{ galaxy_user }}"
   with_items:
+    - '{{ refdata_dir }}'
     - '{{ refdata_log_path }}'
     - '{{ missing_tools_log_path }}'
   become_user: root
