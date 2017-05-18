@@ -1,9 +1,31 @@
 ---
-- name: Copy compare.py script
-  template: src=connect.sh.j2 dest=/usr/local/bin/fetch_refdata.sh mode=a+x
+- name: Copy onedatactl.py script
+  template:
+    src: 'onedatactl.py.j2'
+    dest: '/usr/local/bin/onedatactl'
+    mode: a+x
   become_user: root
   become_method: sudo
 
-- name: Connect to ONEDATA Reference Data space
-  shell: './connect.sh > {{ refdata_log_path }}/refdata_connection.log'
-  ignore_errors: true
+- name: Copy onedatclt.ini file
+  temlate:
+    src: 'onedatactl.ini.j2'
+    dest: '{{ onedataclt_config_file }}'
+  become_user: root
+  become_method: sudo
+
+- name: Configure onedatactl configuration file
+  ini_file:
+    dest: '{{ onedatactl_config_file }}'
+    section: '{{ item.section }}'
+    option: '{{ item.option }}'
+    value: '{{ item.value }}'
+  with_items:
+    - { section: 'refdata', option: 'mountpoint', value: '{{ refdata_dir }}' }
+    - { section: 'refdata', option: 'provider', value: '{{ refdata_provider }}' }
+    - { section: 'refdata', option: 'token', value: '{{ refdata_token }}' }
+  become_user: root
+  become_method: sudo
+
+- name: Mount Onedata  Reference Data space
+  shell: 'onedatactl --mount --refdata'
