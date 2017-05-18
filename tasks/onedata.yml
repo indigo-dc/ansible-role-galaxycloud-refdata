@@ -3,14 +3,14 @@
   template:
     src: 'onedatactl.py.j2'
     dest: '/usr/local/bin/onedatactl'
-    mode: a+x
+    mode: 'a+x'
   become_user: root
   become_method: sudo
 
-- name: Copy onedatclt.ini file
-  temlate:
+- name: Copy onedatactl.ini file
+  template:
     src: 'onedatactl.ini.j2'
-    dest: '{{ onedataclt_config_file }}'
+    dest: '{{ onedatactl_config_file }}'
   become_user: root
   become_method: sudo
 

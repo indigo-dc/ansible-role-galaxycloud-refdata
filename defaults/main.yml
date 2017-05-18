@@ -3,11 +3,11 @@
 
 get_refdata: true
 
-onedata_repository: false
+onedata_repository: true
 
 cvmfs_repository: false
 
-download: true  # This should be false by default. Use OneData
+download: false  # This should be false by default. Use OneData
 
 
 #######################
@@ -52,7 +52,7 @@ galaxy_flavor: "galaxy-no-tools"
 
 onedatactl_config_path: '/etc/galaxy'
 
-ondatactl_config_file: '{{ onedatactl_config_path }}/onedatactl.ini'
+onedatactl_config_file: '{{ onedatactl_config_path }}/onedatactl.ini'
 
 refdata_provider: 'oneprovider2.cloud.ba.infn.it'
 
