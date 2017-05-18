@@ -50,6 +50,10 @@ galaxy_flavor: "galaxy-no-tools"
 #######################
 # OneData configuration
 
+onedatactl_config_path: '/etc/galaxy'
+
+ondatactl_config_file: '{{ onedatactl_config_path }}/onedatactl.ini'
+
 refdata_provider: 'oneprovider2.cloud.ba.infn.it'
 
 refdata_token: 'MDAxNWxvY2F00aW9uIG9uZXpvbmUKMDAzYmlkZW500aWZpZXIgeExqMi00xdFN3YVp1VWIxM1dFSzRoNEdkb2x3cXVwTnpSaGZONXJSN2tZUQowMDFhY2lkIHRpbWUgPCAxNTI1MzM00NzgyCjAwMmZzaWduYXR1cmUgIOzeMtypO75nZvPJdAocInNbgH9zvJi6ifgXDrFVCr00K'
