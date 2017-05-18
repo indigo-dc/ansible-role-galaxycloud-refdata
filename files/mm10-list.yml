@@ -48,7 +48,7 @@ genomes:
           - part: 'mm10.ti'
           - part: 'mm10.transcripts.fa'
           - part: 'mm10_isotable.txt'
-          - part: 'mm10_rfseq.gtf'
+          - part: 'mm10_refseq.gtf'
     others:
       - other: 'genome.fa'
       - other: 'genome.fa.fai'

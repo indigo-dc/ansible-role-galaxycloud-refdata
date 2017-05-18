@@ -32,7 +32,7 @@ genomes:
           - part: 'hg19.fa.rsa'
           - part: 'hg19.fa.sa'
           - part: 'hg19.pac'
-          - part: 'hg19.pac'
+          - part: 'hg19.rbwt'
           - part: 'hg19.rpac'
           - part: 'hg19.rsa'
           - part: 'hg19.sa'
@@ -64,6 +64,13 @@ genomes:
           - part: 'hg19RefSeq.grp'
           - part: 'hg19RefSeq.idx.fa'
           - part: 'hg19RefSeq.rev.1.ebwt'
+          - part: 'hg19RefSeq.rev.2.ebwt'
+          - part: 'hg19RefSeq.rev.2.ebwt'
+          - part: 'hg19RefSeq.seq'
+          - part: 'hg19RefSeq.ti'
+          - part: 'hg19RefSeq.transcripts.fa'
+          - part: 'hg19RefSeq.transcripts_WITHmito.fa'
+
     others:
       - other: 'genome.fa'
       - other: 'genome.fa.fai'
