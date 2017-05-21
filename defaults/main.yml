@@ -1,24 +1,22 @@
 ---
-# defaults file for ansible-role-galaxycloud-refdata
-
 get_refdata: true
+
+refdata_dir: "/refdata"
 
 onedata_repository: true
 
 cvmfs_repository: false
 
-download: false  # This should be false by default. Use OneData
+download: false
 
-
-#######################
+#________________________________
 # Galaxy instance
 galaxy_instance_url: "http://{{ansible_default_ipv4.address}}/galaxy/"
 
 # A list of yml files that list the reference data to be installed.
-refdata_download: "true"
 galaxy_refdata_list_files: [ "refdata_list.yaml" ]
 
-#######################
+#________________________________
 # Galaxy info 
 # imported from indigo-dc.galaxycloud ansible role
 
@@ -41,50 +39,42 @@ galaxy_install_path: "{{ galaxy_FS_path }}/{{ galaxy_directory }}"
 galaxy_venv_path: "{{ galaxy_install_path }}/.venv"
 
 # Galaxy config/galaxy.ini path
-galaxy_config_path: "{{ galaxy_install_path }}/config"
-galaxy_config_file: "{{ galaxy_config_path }}/galaxy.ini"
+galaxy_config_path: '{{ galaxy_install_path }}/config'
+galaxy_config_file: '{{ galaxy_config_path }}/galaxy.ini'
 
 # Galaxy flavor
-galaxy_flavor: "galaxy-no-tools"
+galaxy_flavor: 'galaxy-no-tools'
 
-#######################
+#________________________________
 # OneData configuration
 
 onedatactl_config_path: '/etc/galaxy'
-
 onedatactl_config_file: '{{ onedatactl_config_path }}/onedatactl.ini'
-
 refdata_provider: 'oneprovider2.cloud.ba.infn.it'
-
 refdata_token: 'MDAxNWxvY2F00aW9uIG9uZXpvbmUKMDAzYmlkZW500aWZpZXIgeExqMi00xdFN3YVp1VWIxM1dFSzRoNEdkb2x3cXVwTnpSaGZONXJSN2tZUQowMDFhY2lkIHRpbWUgPCAxNTI1MzM00NzgyCjAwMmZzaWduYXR1cmUgIOzeMtypO75nZvPJdAocInNbgH9zvJi6ifgXDrFVCr00K'
-
 refdata_space: 'elixir-italy.galaxy.refdata'
 
-#######################
+#________________________________
+# Missing tools
+
+galaxy_tools_base_dir: '/tmp'
+missing_tools_log_path: '/tmp/missing_tools_log'
+
+#________________________________
 # Path
 
-#---
-# Ephemeris
-galaxy_tools_base_dir: "/tmp"
+galaxy_refdata_list_path: '/tmp'
+galaxy_tool_data_table_conf_path: '{{ galaxy_install_path }}/tool-data'
+refdata_log_path: '/var/log/refdata' # WARNING: keep refdata_log_path and refdata_dir with different path, otherwise by mounting onedata space you loose log files!
 
-#---
-# Path
-refdata_dir: "/refdata"
-
-galaxy_refdata_list_path: "/tmp"
-
-galaxy_tool_data_table_conf_path: "{{galaxy_install_path}}/tool-data"
-
-refdata_log_path: "/var/log/refdata" # WARNING: keep refdata_log_path and refdata_dir with different path, otherwise by mounting onedata space you loose log files!
-
-missing_tools_log_path: "/tmp/missing_tools_log"
-
-#---
+#________________________________
 # Genome http address (INDIGO_CNR ReCaS Bari Swift container)
-refdata_swift_storage_url: "http://cloud.recas.ba.infn.it:8080/v1/AUTH_3b4918e0a982493e8c3ebcc43586a2a8/test_ref"
 
-#---
+refdata_swift_storage_url: 'http://cloud.recas.ba.infn.it:8080/v1/AUTH_3b4918e0a982493e8c3ebcc43586a2a8/test_ref'
+
+#________________________________
 # Genome
+
 at10: false # A. thaliana (TAIR 10)
 at9: false # A. thaliana (TAIR 9)
 dm2: false # D. melanogaster (dm2)
