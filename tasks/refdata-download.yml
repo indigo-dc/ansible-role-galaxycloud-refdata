@@ -55,7 +55,7 @@
   when: item.flag|bool
 
 - name: Download reference data
-  command: '/usr/bin/python /tmp/refdata_download.py -i {{ galaxy_refdata_list_path }}/{{ item.list }} -o {{ refdata_dir }} -s {{ refdata_space }}'
+  command: '/usr/bin/python /tmp/refdata_download.py -i {{ galaxy_refdata_list_path }}/{{ item.list }} -o {{ refdata_dir }} -s {{ refdata_repository_name }}'
   with_items:
     - { list: "at9-list.yml", flag: "{{ at9 }}" }
     - { list: "at10-list.yml", flag: "{{ at10 }}" }
