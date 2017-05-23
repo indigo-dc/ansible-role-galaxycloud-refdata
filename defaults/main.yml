@@ -3,9 +3,9 @@ get_refdata: true
 
 refdata_dir: "/refdata"
 
-onedata_repository: true
+onedata_repository: false
 
-cvmfs_repository: false
+cvmfs_repository: true
 
 download: false
 
@@ -53,6 +53,15 @@ onedatactl_config_file: '{{ onedatactl_config_path }}/onedatactl.ini'
 refdata_provider: 'oneprovider2.cloud.ba.infn.it'
 refdata_token: 'MDAxNWxvY2F00aW9uIG9uZXpvbmUKMDAzYmlkZW500aWZpZXIgeExqMi00xdFN3YVp1VWIxM1dFSzRoNEdkb2x3cXVwTnpSaGZONXJSN2tZUQowMDFhY2lkIHRpbWUgPCAxNTI1MzM00NzgyCjAwMmZzaWduYXR1cmUgIOzeMtypO75nZvPJdAocInNbgH9zvJi6ifgXDrFVCr00K'
 refdata_space: 'elixir-italy.galaxy.refdata'
+
+#________________________________
+# Cvmfs server configuration
+
+refdata_cvmfs_server_url: '90.147.102.186' 
+refdata_cvmfs_repository_name: 'elixir-italy.galaxy.refdata'
+refdata_cvmfs_key_file: [ 'repository_key.pub' ]
+refdata_cvmfs_proxy_url: '{{ refdata_cvmfs_server_url }}'
+refdata_cvmfs_proxy_port: 80
 
 #________________________________
 # Missing tools
