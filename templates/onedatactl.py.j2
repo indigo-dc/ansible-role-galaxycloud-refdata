@@ -48,8 +48,9 @@ def cli_options():
   parser.add_argument('-c', dest='config_file', help='Load configuration file')
   parser.add_argument('-M', '--mount' , action='store_true', help='Mount spaces')
   parser.add_argument('-U', '--umount', action='store_true', help='Umount space')
+  parser.add_argument('--insecure', action='store_true', help='Allow insecure connection')
+  parser.add_argument('--nonempty', action='store_true', help='Allow mount on non empty directory')
   return parser.parse_args()
-
 
 #______________________________________
 def check_oneclient():
@@ -87,7 +88,6 @@ def show_config(fname):
     print upar[1]
     print upar[2]
 
-
 #______________________________________
 def read_config(fname, section):
   configParser = ConfigParser.RawConfigParser()
@@ -116,22 +116,19 @@ def read_config(fname, section):
 
   return params
 
-
 #______________________________________
-def mount_space(fname, section):
+def mount_space(fname, section, options):
   par = read_config(fname, section)
   if par:
-    connect(par[1], par[2], par[0])
+    connect(par[1], par[2], par[0], options)
   else:
     return
 
-
 #______________________________________
-def connect(provider, token, mountpoint):
-  command = 'oneclient -H %s -t %s %s' % ( provider, token, mountpoint)
+def connect(provider, token, mountpoint, options):
+  command = 'oneclient -H %s -t %s %s %s' % ( provider, token, mountpoint, options)
   print command
   subprocess.call( command, shell=True )
-
 
 #______________________________________
 def umount_space(fname, section):
@@ -141,13 +138,11 @@ def umount_space(fname, section):
   else:
     return
 
-
 #______________________________________
 def umount_vol(mountpoint):
   command = 'fusermount -u %s' % (mountpoint)
   print command
   subprocess.call( command, shell=True )
-
 
 #______________________________________
 def check_mountpoint(data):
@@ -163,6 +158,11 @@ def onedatactl():
 
   fileconfig=0
 
+  # Parse oneclient options as string
+  oneclient_parameters=''
+  if options.insecure: oneclient_parameters += ' --insecure'
+  if options.nonempty: oneclient_parameters += ' -o nonempty'
+
   if options.config_file:
     if check_file(options.config_file): fileconfig = options.config_file
   else:
@@ -171,11 +171,11 @@ def onedatactl():
   if options.mount:
     print fileconfig
     check_file(fileconfig) # Check configuration file
-    if options.refdata: mount_space(fileconfig, 'refdata') # Mount reference data
-    elif options.userdata: mount_space(fileconfig, 'userdata') # Mount user data
+    if options.refdata: mount_space(fileconfig, 'refdata', oneclient_parameters) # Mount reference data
+    elif options.userdata: mount_space(fileconfig, 'userdata', oneclient_parameters) # Mount user data
     else:
-      mount_space(fileconfig, 'refdata')
-      mount_space(fileconfig, 'userdata')
+      mount_space(fileconfig, 'refdata', oneclient_parameters)
+      mount_space(fileconfig, 'userdata', oneclient_parameters)
 
   if options.umount:
     if options.refdata:
