@@ -49,7 +49,7 @@ def cli_options():
   parser.add_argument('-M', '--mount' , action='store_true', help='Mount spaces')
   parser.add_argument('-U', '--umount', action='store_true', help='Umount space')
   parser.add_argument('--insecure', action='store_true', help='Allow insecure connection')
-  parser.add_argument('--nonempty', action='store_true', help='Allow mount on non empty directory')
+  parser.add_argument('-o', dest='opts', action='append', help='Allow FUSE mount options')
   return parser.parse_args()
 
 #______________________________________
@@ -161,7 +161,7 @@ def onedatactl():
   # Parse oneclient options as string
   oneclient_parameters=''
   if options.insecure: oneclient_parameters += ' --insecure'
-  if options.nonempty: oneclient_parameters += ' -o nonempty'
+  if options.opts: oneclient_parameters += ' -o %s' % (' -o '.join(options.opts))
 
   if options.config_file:
     if check_file(options.config_file): fileconfig = options.config_file
