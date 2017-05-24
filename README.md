@@ -131,14 +131,12 @@ License
 -------
 
 Apache Licence v2 [2]
+http://www.apache.org/licenses/LICENSE-2.0
 
 References
 -------
 
-[1] https://galaxyproject.org/
-
-[2] http://www.apache.org/licenses/LICENSE-2.0
-
+https://galaxyproject.org/
 
 Author Information
 ------------------
