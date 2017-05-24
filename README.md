@@ -80,15 +80,15 @@ Example Playbook
 Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
 
 1. Run the role with default options: Onedata
-
+```
     - hosts: servers
       roles:
         - role: indigo-dc.galaxycloud-refdata
           galaxy_flavor: "galaxy-no-tools"
           get_refdata: true
-
+```
 2. Onedata configuration:
-
+```
     - hosts: servers
       roles:
         - role: indigo-dc.galaxycloud-refdata
@@ -99,9 +99,9 @@ Including an example of how to use your role (for instance, with variables passe
           download: false
           refdata_provider: 'oneprovider'
           refdata_token: 'access_token'
-
+```
 3. CernVM-FS configuration:
-
+```
     - hosts: servers
       roles:
         - role: indigo-dc.galaxycloud-refdata
@@ -115,9 +115,9 @@ Including an example of how to use your role (for instance, with variables passe
           refdata_cvmfs_key_file: '{{ repokey }}'
           refdata_cvmfs_proxy_url: '{{ ip }}'
           refdata_cvmfs_proxy_port: 80
-
+```
 4. Download configuration:
-
+```
     - hosts: servers
       roles:
         - role: indigo-dc.galaxycloud-refdata
@@ -126,7 +126,7 @@ Including an example of how to use your role (for instance, with variables passe
           onedata_repository: false
           cvmfs_repository: false
           download: true
-
+```
 License
 -------
 
