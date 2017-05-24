@@ -5,10 +5,9 @@ Reference data ansible role for indigo-dc.galaxycloud.
 The role provider reference data and the corresponding galaxy configuration.
 
 Three reference data source are supported
-
-1. onedata ------> Onedata space with reference data is mounted
-2. cvmfs --------> CernVM-FS repository with reference data is mounted
-3. download -----> Reference data download
+- onedata ------> Onedata space with reference data is mounted
+- cvmfs --------> CernVM-FS repository with reference data is mounted
+- download -----> Reference data download
 
 1. Onedata space: https://groundnuty.gitbooks.io/onedata-documentation/content/index.html
    A space hosting the reference data is mounted exploiting onedata.
