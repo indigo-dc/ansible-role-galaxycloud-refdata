@@ -69,11 +69,11 @@ refdata_cvmfs_proxy_port: 80 -> Proxy port
 
 Dependencies
 ------------
-
+```
 dependencies:
   - { role: indigo-dc.oneclient, when: onedata_repository|bool }
   - { role: mtangaro.cvmfs-client, server_url: '{{ refdata_cvmfs_server_url }}', repository_name: '{{ refdata_cvmfs_repository_name }}', cvmfs_public_key: '{{ refdata_cvmfs_key_file }}', proxy_url: '{{ refdata_cvmfs_proxy_url }}', proxy_port: '{{ refdata_cvmfs_proxy_port }}', cvmfs_mountpoint: '{{ refdata_dir }}', when: cvmfs_repository|bool }
-
+```
 Example Playbook
 ----------------
 
