@@ -10,7 +10,7 @@ Three reference data source are supported:
 2. cvmfs_repository: false --> CernVM-FS server
 3. download: false ----------> Reference data download (need >100GB free space on /refdata directory).
 
->>>> WARNING! Only one of them should be set true. Current default 'onedata_repository' <<<<
+WARNING! Only one of them should be set true. Current default 'onedata_repository'
 
 1. Onedata space: https://groundnuty.gitbooks.io/onedata-documentation/content/index.html
    A space hosting the reference data is mounted exploiting onedata.
