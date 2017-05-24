@@ -28,4 +28,4 @@
   become_method: sudo
 
 - name: Mount Onedata  Reference Data space
-  shell: 'oneclient -H {{ refdata_provider }} -t {{ refdata_token }} {{ refdata_dir }} --insecure'
+  shell: 'oneclient -H {{ refdata_provider }} -t {{ refdata_token }} {{ refdata_dir }} --insecure -o ro'
