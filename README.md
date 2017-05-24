@@ -4,13 +4,11 @@ Indigo-dc.galaxycloud-refdata
 Reference data ansible role for indigo-dc.galaxycloud.
 The role provider reference data and the corresponding galaxy configuration.
 
-Three reference data source are supported:
+Three reference data source are supported
 
-1. onedata_repository: true -> Onedata space
-2. cvmfs_repository: false --> CernVM-FS server
-3. download: false ----------> Reference data download (need >100GB free space on /refdata directory).
-
-WARNING! Only one of them should be set true. Current default 'onedata_repository'
+1. onedata ------> Onedata space with reference data is mounted
+2. cvmfs --------> CernVM-FS repository with reference data is mounted
+3. download -----> Reference data download
 
 1. Onedata space: https://groundnuty.gitbooks.io/onedata-documentation/content/index.html
    A space hosting the reference data is mounted exploiting onedata.
@@ -48,13 +46,13 @@ get_refdata: true -> Enable reference data configuration.
 
 refdata_repository_name: 'repo_name' -> Onedata space, CernVM-FS repository name or subdirectory download dir.
 
-onedata_repository: true -> Mount Onedata space for reference data
-
-cvmfs_repository: false -> Mount CernVM-FS space for reference data
-
-download: false -> Download Reference data
+refdata_provider_type: 'onedata' (default)
+1. onedata ------> Onedata space with reference data is mounted
+2. cvmfs --------> CernVM-FS repository with reference data is mounted
+3. download -----> Reference data download
 
 refdata_provider: 'provider' -> Set onedata provider 
+
 refdata_token: 'access_token' -> Set onedata access token
 
 refdata_cvmfs_server_url: 'url' -> Set CernVM-FS server (stratum 0 or Replica) address without 'http://' string, e.g. single ip address.
@@ -71,8 +69,8 @@ Dependencies
 ------------
 ```
 dependencies:
-  - { role: indigo-dc.oneclient, when: onedata_repository|bool }
-  - { role: mtangaro.cvmfs-client, server_url: '{{ refdata_cvmfs_server_url }}', repository_name: '{{ refdata_cvmfs_repository_name }}', cvmfs_public_key: '{{ refdata_cvmfs_key_file }}', proxy_url: '{{ refdata_cvmfs_proxy_url }}', proxy_port: '{{ refdata_cvmfs_proxy_port }}', cvmfs_mountpoint: '{{ refdata_dir }}', when: cvmfs_repository|bool }
+  - { role: indigo-dc.oneclient, when: refdata_provider_type == 'onedata' }
+  - { role: mtangaro.cvmfs-client, server_url: '{{ refdata_cvmfs_server_url }}', repository_name: '{{ refdata_cvmfs_repository_name }}', cvmfs_public_key: '{{ refdata_cvmfs_key_file }}', proxy_url: '{{ refdata_cvmfs_proxy_url }}', proxy_port: '{{ refdata_cvmfs_proxy_port }}', cvmfs_mountpoint: '{{ refdata_dir }}', when: refdata_provider_type == 'cvmfs' }
 ```
 Example Playbook
 ----------------
@@ -94,9 +92,7 @@ Including an example of how to use your role (for instance, with variables passe
         - role: indigo-dc.galaxycloud-refdata
           get_refdata: true
           refdata_repository_name: 'onedata_space_name'
-          onedata_repository: true
-          cvmfs_repository: false
-          download: false
+          refdata_provider_type: 'onedata'
           refdata_provider: 'oneprovider'
           refdata_token: 'access_token'
 ```
@@ -107,9 +103,7 @@ Including an example of how to use your role (for instance, with variables passe
         - role: indigo-dc.galaxycloud-refdata
           get_refdata: true
           refdata_repository_name: 'cvmfs_server_name'
-          onedata_repository: false
-          cvmfs_repository: true
-          download: false
+          refdata_provider_type: 'cvmfs'
           refdata_cvmfs_server_url: '{{ ip }}'
           refdata_cvmfs_repository_name: '{{ reponame }}'
           refdata_cvmfs_key_file: '{{ repokey }}'
@@ -123,9 +117,7 @@ Including an example of how to use your role (for instance, with variables passe
         - role: indigo-dc.galaxycloud-refdata
           get_refdata: true
           refdata_repository_name: 'subdir'
-          onedata_repository: false
-          cvmfs_repository: false
-          download: true
+          refdata_provider_type: 'download'
 ```
 License
 -------

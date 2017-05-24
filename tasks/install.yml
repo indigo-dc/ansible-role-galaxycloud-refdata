@@ -11,13 +11,13 @@
 
 - name: Mount ONEDATA Reference Data Space
   include: onedata.yml
-  when: onedata_repository
+  when: refdata_provider_type == 'onedata'
   become_user: "{{ galaxy_user }}"
   become: true
 
 - name: Download Reference Data
   include: refdata-download.yml
-  when: download
+  when: refdata_provider_type == 'download'
   become_user: "{{ galaxy_user }}"
   become: true
 

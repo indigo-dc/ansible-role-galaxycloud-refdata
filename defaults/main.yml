@@ -5,11 +5,14 @@ refdata_dir: "/refdata"
 
 refdata_repository_name: 'elixir-italy.galaxy.refdata'
 
-onedata_repository: false
+#________________________________
+# Reference data provider type
+#
+# 1. onedata ------> Onedata space with reference data is mounted
+# 2. cvmfs --------> CernVM-FS repository with reference data is mounted
+# 3. download -----> Reference data download
 
-cvmfs_repository: true
-
-download: false
+refdata_provider_type: 'onedata'
 
 #________________________________
 # Galaxy instance
