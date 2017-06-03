@@ -1,6 +1,11 @@
 ---
 # Create directories for reference data and logs
 
+- set_fact:
+    refdata_dir: '{{ galaxy_install_path }}/refdata'
+  when: galaxy_lrms == "slurm"
+
+
 - name: Create directories
   file:
     path: "{{ item }}"

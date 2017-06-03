@@ -50,6 +50,9 @@ galaxy_config_file: '{{ galaxy_config_path }}/galaxy.ini'
 # Galaxy flavor
 galaxy_flavor: 'galaxy-no-tools'
 
+# Galaxy virtual elastic cluster support: Currently supported local and slurm
+galaxy_lrms: local
+
 #________________________________
 # OneData configuration
 
