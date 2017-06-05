@@ -64,7 +64,7 @@ refdata_space: '{{ refdata_repository_name }}'
 
 refdata_cvmfs_server_url: '90.147.102.186' 
 refdata_cvmfs_repository_name: '{{ refdata_repository_name }}'
-refdata_cvmfs_key_file: [ 'repository_key.pub' ]
+refdata_cvmfs_key_file: 'repository_key.pub'
 refdata_cvmfs_proxy_url: '{{ refdata_cvmfs_server_url }}'
 refdata_cvmfs_proxy_port: 80
 
