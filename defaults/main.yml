@@ -53,6 +53,9 @@ galaxy_flavor: 'galaxy-no-tools'
 # Log directory
 galaxy_log_path: "/var/log/galaxy"
 
+# Galaxy virtual elastic cluster support: Currently supported local and slurm
+galaxy_lrms: local
+
 #______________________________________
 # Init system
 # Supported: supervisord, init
