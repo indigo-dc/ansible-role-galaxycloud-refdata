@@ -1,4 +1,16 @@
 ---
+- name: Create log directory
+  file:
+    path: '{{ missing_tools_log_path }}'
+    state: directory
+    owner: '{{ galaxy_user }}'
+    group: '{{ galaxy_user }}'
+  become_user: root
+  become_method: sudo
+
+- name: Check Galaxy is up and running
+  include: check_galaxy.yml
+
 - name: Create/invoke script virtualenv
   pip: 
     name: "{{ item }}" 
@@ -16,7 +28,9 @@
     dest: "{{ missing_tools_log_path }}"
 
 - name: Copy compare.py script
-  template: src=compare.py.j2 dest=/tmp/compare.py
+  template:
+    src: 'compare.py.j2'
+    dest: '/tmp/compare.py'
 
 - name: Get missing tool list
   command: '{{galaxy_venv_path}}/bin/python /tmp/compare.py -f /tmp/{{ galaxy_flavor }}-tool-list.yml -i {{ missing_tools_log_path }}/galaxy-installed-tool-list.yml -o {{ missing_tools_log_path }}/galaxy-missing-tool-list.yml'
