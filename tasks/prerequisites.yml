@@ -10,6 +10,17 @@
   with_items:
     - '{{ refdata_dir }}'
     - '{{ refdata_log_path }}'
-    - '{{ missing_tools_log_path }}'
   become_user: root
   become_method: sudo
+
+- name: Copy Galaxy management script
+  template:
+    src: '{{ item.src }}'
+    dest: '{{ item.dest }}'
+    mode: '{{ item.mode }}'
+  with_items:
+    - { src: 'galaxyctl.py.j2', dest: '/usr/local/bin/galaxyctl', mode: 'a+x' }
+    - { src: 'galaxyctl_libs.py.j2', dest: '/usr/local/bin/galaxyctl_libs.py', mode: 'a+x' }
+  become_user: root
+  become_method: sudo
+
