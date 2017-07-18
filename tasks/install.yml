@@ -1,8 +1,9 @@
 ---
+- name: Mount Onedata reference data space
   include: onedata.yml
   when: refdata_provider_type == 'onedata'
 
-- name: Download Reference Data
+- name: Download reference data
   include: refdata-download.yml
   when: refdata_provider_type == 'download'
 
