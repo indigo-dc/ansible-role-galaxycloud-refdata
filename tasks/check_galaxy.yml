@@ -1,6 +1,6 @@
 ---
 - name: Copy check-galaxy script
-  copy:
+  template:
     src: 'check_galaxy.py.j2'
     dest: '/tmp/check_galaxy.py'
     mode: a+x
