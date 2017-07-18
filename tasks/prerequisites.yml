@@ -10,6 +10,7 @@
   with_items:
     - '{{ refdata_dir }}'
     - '{{ refdata_log_path }}'
+    - '{{ galaxy_log_path }}'
   become_user: root
   become_method: sudo
 
@@ -24,4 +25,3 @@
     - { src: 'galaxyctl_libs.py.j2', dest: '/usr/local/bin/galaxyctl_libs.py', mode: 'a+x' }
   become_user: root
   become_method: sudo
-

@@ -1,7 +1,4 @@
 ---
-- include: prerequisites.yml
-
-- name: Mount ONEDATA Reference Data Space
   include: onedata.yml
   when: refdata_provider_type == 'onedata'
 

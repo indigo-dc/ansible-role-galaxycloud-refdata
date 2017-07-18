@@ -1,13 +1,4 @@
 ---
-- name: Create log directory
-  file:
-    path: '{{ missing_tools_log_path }}'
-    state: directory
-    owner: '{{ galaxy_user }}'
-    group: '{{ galaxy_user }}'
-  become_user: root
-  become_method: sudo
-
 - name: Check Galaxy is up and running
   include: check_galaxy.yml
 
