@@ -25,7 +25,7 @@
   when: ansible_os_family == "Debian" and init_type == "supervisord"
 
 - name: Check for galaxyctl script
-  stat: path=/usr/local/bin/galaxyclt
+  stat: path=/usr/local/bin/galaxyctl
   register: galaxyctl_installed
 
 - name: Copy Galaxy management script
