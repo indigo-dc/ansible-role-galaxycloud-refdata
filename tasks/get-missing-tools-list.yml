@@ -16,7 +16,7 @@
 - name: Get Galaxy flavor tool list
   get_url: 
     url: "https://raw.githubusercontent.com/indigo-dc/Galaxy-flavors-recipes/master/galaxy-flavors/{{ galaxy_flavor }}-tool-list.yml"
-    dest: "{{ missing_tools_log_path }}"
+    dest: "{{ galaxy_log_path }}"
 
 - name: Copy compare.py script
   template:
@@ -24,6 +24,6 @@
     dest: '/tmp/compare.py'
 
 - name: Get missing tool list
-  command: '{{galaxy_venv_path}}/bin/python /tmp/compare.py -f /tmp/{{ galaxy_flavor }}-tool-list.yml -i {{ missing_tools_log_path }}/galaxy-installed-tool-list.yml -o {{ missing_tools_log_path }}/galaxy-missing-tool-list.yml'
+  command: '{{galaxy_venv_path}}/bin/python /tmp/compare.py -f /tmp/{{ galaxy_flavor }}-tool-list.yml -i {{ galaxy_log_path }}/galaxy-installed-tool-list.yml -o {{ galaxy_log_path }}/galaxy-missing-tool-list.yml'
   environment:
     VIRTUAL_ENV: "{{ galaxy_venv_path }}"
