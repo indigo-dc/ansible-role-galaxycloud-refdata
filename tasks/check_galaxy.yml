@@ -2,13 +2,11 @@
 - name: Copy check-galaxy script
   template:
     src: 'check_galaxy.py.j2'
-    dest: '/usr/local/bin/check_galaxy.py'
+    dest: '/tmp/check_galaxy.py'
     mode: a+x
-  become_user: root
-  become_method: sudo
 
 - name: Check Galaxy stats server
-  shell: '/usr/bin/python /usr/local/bin/check_galaxy.py'
+  shell: '/usr/bin/python /tmp/check_galaxy.py'
   become_user: root
   become_method: sudo
 

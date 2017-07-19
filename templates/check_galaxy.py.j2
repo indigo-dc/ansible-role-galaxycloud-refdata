@@ -9,17 +9,25 @@ Contributors:
 author: Tangaro Marco
 email: ma.tangaro@ibiom.cnr.it
 '''
-from galaxyctl_libs import UwsgiStatsServer
-from galaxyctl_libs import bcolors
 
-# Import galaxy start/stop/restart
-import galaxyctl
-
-galaxy_config_file = '{{ galaxy_config_file }}'
+galaxy_config_file = '/home/galaxy/galaxy/config/galaxy.ini'
 
 #______________________________________
 def check_galaxy():
 
+  # Import galaxyctl_libs
+  import sys
+  sys.path.append('/usr/local/bin')
+  from galaxyctl_libs import UwsgiStatsServer
+  from galaxyctl_libs import bcolors
+
+
+  # Import galaxyctl start/stop/restart
+  import os, imp
+  os.chdir('/usr/local/bin')
+  galaxyctl = imp.load_source('galaxyctl', 'galaxyctl')
+
+  # Check Galaxy
   stats = UwsgiStatsServer(timeout=300, fname=galaxy_config_file)
   server = stats.GetUwsgiStatsServer()
 
