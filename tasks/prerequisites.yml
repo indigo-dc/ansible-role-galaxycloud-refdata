@@ -10,6 +10,32 @@
   with_items:
     - '{{ refdata_dir }}'
     - '{{ refdata_log_path }}'
-    - '{{ missing_tools_log_path }}'
+    - '{{ galaxy_log_path }}'
   become_user: root
   become_method: sudo
+
+- name: '[EL] Set supervisord conf path'
+  set_fact:
+    supervisord_conf_path: '/etc'
+  when: ansible_os_family == "RedHat" and init_type == "supervisord"
+
+- name: '[Ubuntu] Set supervisord conf path'
+  set_fact:
+    supervisord_conf_path: '/etc/supervisor'
+  when: ansible_os_family == "Debian" and init_type == "supervisord"
+
+- name: Check for galaxyctl script
+  stat: path=/usr/local/bin/galaxyctl
+  register: galaxyctl_installed
+
+- name: Copy Galaxy management script
+  template:
+    src: '{{ item.src }}'
+    dest: '{{ item.dest }}'
+    mode: '{{ item.mode }}'
+  with_items:
+    - { src: 'galaxyctl.py.j2', dest: '/usr/local/bin/galaxyctl', mode: 'a+x' }
+    - { src: 'galaxyctl_libs.py.j2', dest: '/usr/local/bin/galaxyctl_libs.py', mode: 'a+x' }
+  become_user: root
+  become_method: sudo
+  when: not galaxyctl_installed.stat.exists

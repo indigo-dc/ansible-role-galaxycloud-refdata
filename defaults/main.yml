@@ -50,6 +50,16 @@ galaxy_config_file: '{{ galaxy_config_path }}/galaxy.ini'
 # Galaxy flavor
 galaxy_flavor: 'galaxy-no-tools'
 
+# Log directory
+galaxy_log_path: "/var/log/galaxy"
+
+#______________________________________
+# Init system
+# Supported: supervisord, init
+# supervisord ---> Current default, it is mandatory for docker container, since there's no systemd.
+# init ----------> CentOS 7 and Ubuntu 16.04 use systemd, Ubuntu 14.04 is using upstart.
+init_type: 'supervisord'
+
 #________________________________
 # OneData configuration
 
@@ -72,7 +82,6 @@ refdata_cvmfs_proxy_port: 80
 # Missing tools
 
 galaxy_tools_base_dir: '/tmp'
-missing_tools_log_path: '/tmp/missing_tools_log'
 
 #________________________________
 # Path

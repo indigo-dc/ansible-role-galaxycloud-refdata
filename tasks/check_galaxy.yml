@@ -1,0 +1,19 @@
+---
+- name: Copy check-galaxy script
+  template:
+    src: 'check_galaxy.py.j2'
+    dest: '/tmp/check_galaxy.py'
+    mode: a+x
+
+- name: Check Galaxy stats server
+  shell: '/usr/bin/python /tmp/check_galaxy.py'
+  become_user: root
+  become_method: sudo
+
+- name: Check if Galaxy is online
+  uri:
+    url: '{{ galaxy_instance_url }}'
+  register: result
+  until: result.status == 200
+  retries: 30
+  delay: 10

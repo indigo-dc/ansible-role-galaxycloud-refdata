@@ -1,0 +1,42 @@
+#!/usr/bin/env python
+
+'''
+ELIXIR-ITALY
+INDIGO-DataCloud
+IBIOM-CNR
+
+Contributors:
+author: Tangaro Marco
+email: ma.tangaro@ibiom.cnr.it
+'''
+
+galaxy_config_file = '/home/galaxy/galaxy/config/galaxy.ini'
+
+#______________________________________
+def check_galaxy():
+
+  # Import galaxyctl_libs
+  import sys
+  sys.path.append('/usr/local/bin')
+  from galaxyctl_libs import UwsgiStatsServer
+  from galaxyctl_libs import bcolors
+
+
+  # Import galaxyctl start/stop/restart
+  import os, imp
+  os.chdir('/usr/local/bin')
+  galaxyctl = imp.load_source('galaxyctl', 'galaxyctl')
+
+  # Check Galaxy
+  stats = UwsgiStatsServer(timeout=300, fname=galaxy_config_file)
+  server = stats.GetUwsgiStatsServer()
+
+  if server is False:
+    galaxyctl.restart_galaxy(galaxy_config_file, 300, True)
+  else:
+    galaxyctl.galaxy_workers_check(galaxy_config_file, 300)
+    galaxyctl.galaxy_startup_check(galaxy_config_file, 300)
+
+#______________________________________
+if __name__ == '__main__':
+  check_galaxy()

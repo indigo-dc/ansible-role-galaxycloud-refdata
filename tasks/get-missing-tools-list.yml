@@ -1,4 +1,7 @@
 ---
+- name: Check Galaxy is up and running
+  include: check_galaxy.yml
+
 - name: Create/invoke script virtualenv
   pip: 
     name: "{{ item }}" 
@@ -8,17 +11,19 @@
     - ephemeris==0.4.0
 
 - name: Get installed tool list
-  command: '{{ galaxy_tools_base_dir }}/venv/bin/get-tool-list -g {{ galaxy_instance_url }} -o {{ missing_tools_log_path }}/galaxy-installed-tool-list.yml'
+  command: '{{ galaxy_tools_base_dir }}/venv/bin/get-tool-list -g {{ galaxy_instance_url }} -o {{ galaxy_log_path }}/galaxy-installed-tool-list.yml'
 
 - name: Get Galaxy flavor tool list
   get_url: 
     url: "https://raw.githubusercontent.com/indigo-dc/Galaxy-flavors-recipes/master/galaxy-flavors/{{ galaxy_flavor }}-tool-list.yml"
-    dest: "{{ missing_tools_log_path }}"
+    dest: "{{ galaxy_log_path }}"
 
 - name: Copy compare.py script
-  template: src=compare.py.j2 dest=/tmp/compare.py
+  template:
+    src: 'compare.py.j2'
+    dest: '/tmp/compare.py'
 
 - name: Get missing tool list
-  command: '{{galaxy_venv_path}}/bin/python /tmp/compare.py -f /tmp/{{ galaxy_flavor }}-tool-list.yml -i {{ missing_tools_log_path }}/galaxy-installed-tool-list.yml -o {{ missing_tools_log_path }}/galaxy-missing-tool-list.yml'
+  command: '{{galaxy_venv_path}}/bin/python /tmp/compare.py -f /tmp/{{ galaxy_flavor }}-tool-list.yml -i {{ galaxy_log_path }}/galaxy-installed-tool-list.yml -o {{ galaxy_log_path }}/galaxy-missing-tool-list.yml'
   environment:
     VIRTUAL_ENV: "{{ galaxy_venv_path }}"
