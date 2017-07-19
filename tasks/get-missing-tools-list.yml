@@ -11,7 +11,7 @@
     - ephemeris==0.4.0
 
 - name: Get installed tool list
-  command: '{{ galaxy_tools_base_dir }}/venv/bin/get-tool-list -g {{ galaxy_instance_url }} -o {{ missing_tools_log_path }}/galaxy-installed-tool-list.yml'
+  command: '{{ galaxy_tools_base_dir }}/venv/bin/get-tool-list -g {{ galaxy_instance_url }} -o {{ galaxy_log_path }}/galaxy-installed-tool-list.yml'
 
 - name: Get Galaxy flavor tool list
   get_url: 
