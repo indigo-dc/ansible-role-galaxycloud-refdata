@@ -11,6 +11,8 @@ email: ma.tangaro@ibiom.cnr.it
 '''
 
 galaxy_config_file = '/home/galaxy/galaxy/config/galaxy.ini'
+wait_time = 300
+retries_number = 5
 
 #______________________________________
 def check_galaxy():
@@ -28,14 +30,14 @@ def check_galaxy():
   galaxyctl = imp.load_source('galaxyctl', 'galaxyctl')
 
   # Check Galaxy
-  stats = UwsgiStatsServer(timeout=300, fname=galaxy_config_file)
+  stats = UwsgiStatsServer(timeout=wait_time, fname=galaxy_config_file)
   server = stats.GetUwsgiStatsServer()
 
   if server is False:
-    galaxyctl.restart_galaxy(galaxy_config_file, 300, True)
+    galaxyctl.restart_galaxy(galaxy_config_file, wait_time, True, retry_number)
   else:
-    galaxyctl.galaxy_workers_check(galaxy_config_file, 300)
-    galaxyctl.galaxy_startup_check(galaxy_config_file, 300)
+    galaxyctl.galaxy_workers_check(galaxy_config_file, wait_time)
+    galaxyctl.galaxy_startup_check(galaxy_config_file, wait_time)
 
 #______________________________________
 if __name__ == '__main__':
