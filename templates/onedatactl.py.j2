@@ -24,10 +24,10 @@ from galaxyctl_libs import OneDataCtl
 
 # Logging
 import logging
-logging.basicConfig(filename='/var/log/galaxy/galaxyctl.log', format='%(levelname)s %(asctime)s %(message)s', level=logging.DEBUG)
+logging.basicConfig(filename='{{ galaxy_log_path }}/galaxyctl.log', format='%(levelname)s %(asctime)s %(message)s', level=logging.DEBUG)
 
 # Config files
-onedatactl_config_file = '/etc/galaxy/onedatactl.ini'
+onedatactl_config_file = '{{ onedatactl_config_file }}'
 
 #______________________________________
 def cli_options():
