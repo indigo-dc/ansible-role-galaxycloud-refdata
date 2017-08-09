@@ -2,7 +2,7 @@
 - name: Copy onedatactl.py script
   template:
     src: 'onedatactl.py.j2'
-    dest: '/usr/local/bin/onedatactl'
+    dest: '{{ galaxy_custom_script_path }}/onedatactl'
     mode: 'a+x'
   become_user: root
   become_method: sudo

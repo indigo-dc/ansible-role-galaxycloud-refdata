@@ -1,6 +1,6 @@
 ---
 - name: Restart Galaxy
-  command: "/usr/local/bin/galaxyctl restart galaxy --force"
+  command: "{{ galaxy_custom_script_path }}/galaxyctl restart galaxy --force"
   ignore_errors: yes
   become_user: root
   become_method: sudo
