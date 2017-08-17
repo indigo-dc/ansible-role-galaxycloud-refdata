@@ -14,6 +14,32 @@
   become_user: root
   become_method: sudo
 
+#______________________________________
+# Install dependencies
+
+- name: '[EL] Install packages'
+  yum:
+    name: '{{ item }}'
+    state: present
+  with_items:
+    - lsof
+  become_user: root
+  become_method: sudo
+  when: ansible_os_family == "RedHat"
+
+- name: '[Ubuntu] Install packages'
+  apt:
+    name: '{{ item }}'
+    state: present
+  with_items:
+    - lsof
+  become_user: root
+  become_method: sudo
+  when: ansible_os_family == "Debian"
+
+#______________________________________
+# Install galaxyctl scripts
+
 - name: '[EL] Set supervisord conf path'
   set_fact:
     supervisord_conf_path: '/etc'
@@ -25,7 +51,7 @@
   when: ansible_os_family == "Debian" and init_type == "supervisord"
 
 - name: Check for galaxyctl script
-  stat: path=/usr/local/bin/galaxyctl
+  stat: path='{{ galaxy_custom_script_path }}/galaxyctl'
   register: galaxyctl_installed
 
 - name: Copy Galaxy management script
@@ -34,8 +60,8 @@
     dest: '{{ item.dest }}'
     mode: '{{ item.mode }}'
   with_items:
-    - { src: 'galaxyctl.py.j2', dest: '/usr/local/bin/galaxyctl', mode: 'a+x' }
-    - { src: 'galaxyctl_libs.py.j2', dest: '/usr/local/bin/galaxyctl_libs.py', mode: 'a+x' }
+    - { src: 'galaxyctl_libs.py.j2', dest: '{{ galaxy_custom_script_path }}/galaxyctl_libs.py', mode: 'a+x' }
+    - { src: 'galaxyctl.py.j2', dest: '{{ galaxy_custom_script_path }}/galaxyctl', mode: 'a+x' }
   become_user: root
   become_method: sudo
   when: not galaxyctl_installed.stat.exists

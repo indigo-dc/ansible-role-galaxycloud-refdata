@@ -53,6 +53,10 @@ galaxy_flavor: 'galaxy-no-tools'
 # Log directory
 galaxy_log_path: "/var/log/galaxy"
 
+# Galaxy custom configuration files and script path
+galaxy_custom_config_path: '/etc/galaxy'
+galaxy_custom_script_path: '/usr/local/bin'
+
 #______________________________________
 # Init system
 # Supported: supervisord, init
@@ -63,8 +67,7 @@ init_type: 'supervisord'
 #________________________________
 # OneData configuration
 
-onedatactl_config_path: '/etc/galaxy'
-onedatactl_config_file: '{{ onedatactl_config_path }}/onedatactl.ini'
+onedatactl_config_file: '{{ galaxy_custom_config_path }}/onedatactl.ini'
 refdata_provider: 'oneprovider2.cloud.ba.infn.it'
 refdata_token: 'MDAxNWxvY2F00aW9uIG9uZXpvbmUKMDAzYmlkZW500aWZpZXIgeExqMi00xdFN3YVp1VWIxM1dFSzRoNEdkb2x3cXVwTnpSaGZONXJSN2tZUQowMDFhY2lkIHRpbWUgPCAxNTI1MzM00NzgyCjAwMmZzaWduYXR1cmUgIOzeMtypO75nZvPJdAocInNbgH9zvJi6ifgXDrFVCr00K'
 refdata_space: '{{ refdata_repository_name }}'
