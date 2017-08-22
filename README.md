@@ -9,32 +9,22 @@ Three reference data source are supported
 - cvmfs --------> CernVM-FS repository with reference data is mounted
 - download -----> Reference data download
 
-1. Onedata space: https://groundnuty.gitbooks.io/onedata-documentation/content/index.html
-   A space hosting the reference data is mounted exploiting onedata.
+1. A CernVM-FS server is used to provide reference data. It is mounted to /refdata.
+   CernVM-FS: http://cvmfs.readthedocs.io/en/stable/index.html
 
-   onedata_repository: true
-   cvmfs_repository: false
-   download: false
+2. A space hosting the reference data is mounted, exploiting onedata, to /refdata.
+   Onedata: https://groundnuty.gitbooks.io/onedata-documentation/content/index.html
 
-2. A CernVM-FS server is used to provide reference data: http://cvmfs.readthedocs.io/en/stable/index.html
-   
-   onedata_repository: false
-   cvmfs_repository: true
-   download: false
-
-3. All the reference file are downloaded on '/refdata' (this needs >100GB free space on /refdata directory).
-
-   onedata_repository: false
-   cvmfs_repository: false
-   download: true
+3. All the reference file are downloaded on /refdata (this needs >100GB free space on /refdata directory).
 
 Requirements
 ------------
-
-By default the role use onedata to provide reference data. To do that 'oneclient' needs to be installed on your system.
+If the role use onedata to provide reference data, onedata command line tool ``oneclient`` needs to be installed on your system.
 The role depends on indigo-dc.oneclient role and install it automatically.
 
-When a CernVM-FS server is used, the role run indigo-dc.cvmfs-client is automatically run to install cvmfs.
+When a CernVM-FS server is used, the role run indigo-dc.cvmfs-client is automatically run to install and configure the cvmfs client.
+
+Finally, if the download option is used, the role exploits a python script to download the reference data, which depends on python-pycurl.
 
 Role Variables
 --------------
