@@ -141,42 +141,56 @@ For onedata reference data provider, the role depends on indigo-dc.oneclient rol
 Example Playbook
 ----------------
 
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
+- Configure Galaxy with CernVM-FS reference data volume.
+```yaml
+- hosts: servers
+  roles:
+    - role: indigo-dc.galaxycloud-refdata
+      galaxy_flavor: 'galaxy-no-tools'
+      get_refdata: true
+      refdata_provider_type: 'cvmfs'
+      refdata_cvmfs_server_url: '90.147.102.186'
+      refdata_cvmfs_repository_name: 'elixir-italy.galaxy.refdata'
+      refdata_cvmfs_key_file: 'elixir-italy.galaxy.refdata'
+      refdata_cvmfs_proxy_url: 'DIRECT'
+```
 
-1. Run the role with default options: Onedata
+- Configure Galaxy with Onedata space for reference data.
+```yaml
+- hosts: servers
+  roles:
+    - role: indigo-dc.galaxycloud-refdata
+      galaxy_flavor: "galaxy-no-tools"
+      get_refdata: true
+      refdata_provider: 'oneprovider2.cloud.ba.infn.it'
+      refdata_token: 'MDAxNWxvY2F00aW9uIG9uZXpvbmUKMDAzYmlkZW500aWZpZXIgeExqMi00xdFN3YVp1VWIxM1dFSzRoNEdkb2x3cXVwTnpSaGZONXJSN2tZUQowMDFhY2lkIHRpbWUgPCAxNTI1MzM00NzgyCjAwMmZzaWduYXR1cmUgIOzeMtypO75nZvPJdAocInNbgH9zvJi6ifgXDrFVCr00K'
+      refdata_space: 'elixir-italy.galaxy.refdata'
 ```
-    - hosts: servers
-      roles:
-        - role: indigo-dc.galaxycloud-refdata
-          galaxy_flavor: "galaxy-no-tools"
-          get_refdata: true
-          refdata_provider_type: 'onedata'
-          refdata_provider: 'oneprovider'
-          refdata_token: 'access_token'
+
+- Download (all available) reference data. You can select which one download.
+```yaml
+- hosts: servers
+  roles:
+    - role: indigo-dc.galaxycloud-refdata
+      galaxy_flavor: 'galaxy-no-tools'
+      get_refdata: true
+      refdata_repository_name: 'elixir-italy.galaxy.refdata'
+      refdata_provider_type: 'download'
+      at10: true # A. thaliana (TAIR 10)
+      at9: true # A. thaliana (TAIR 9)
+      dm2: true # D. melanogaster (dm2)
+      dm3: true # D. melanogaster (dm3)
+      hg18: true # H. sapiens (hg18)
+      hg19: true # H. sapiens (hg19)
+      hg38: true # H. sapeins (hg38)
+      mm10: true # M. musculus (mm10)
+      mm8: true # M. musculus (mm9)
+      mm9: true # M. musculus (mm8)
+      sacCer1: true # S. cerevisiae (sacCer1)
+      sacCer2: true # S. cerevisiae (sacCer2)
+      saacCer3: true # S. cerevisiae (sacCer3)
 ```
-3. CernVM-FS configuration:
-```
-    - hosts: servers
-      roles:
-        - role: indigo-dc.galaxycloud-refdata
-          get_refdata: true
-          refdata_repository_name: 'cvmfs_server_name'
-          refdata_provider_type: 'cvmfs'
-          refdata_cvmfs_server_url: '{{ ip }}'
-          refdata_cvmfs_repository_name: '{{ reponame }}'
-          refdata_cvmfs_key_file: '{{ repokey }}'
-          refdata_cvmfs_proxy_url: '{{ ip }}'
-          refdata_cvmfs_proxy_port: 80
-```
-4. Download configuration:
-```
-    - hosts: servers
-      roles:
-        - role: indigo-dc.galaxycloud-refdata
-          get_refdata: true
-          refdata_repository_name: 'subdir'
-          refdata_provider_type: 'download'
-```
+
 License
 -------
 
@@ -185,11 +199,15 @@ Apache Licence v2
 http://www.apache.org/licenses/LICENSE-2.0
 
 References
--------
+----------
 
-https://galaxyproject.org/
+Galaxy project: https://galaxyproject.org
+
+CernVM-FS: http://cvmfs.readthedocs.io/en/stable/index.html
+
+Onedata: https://groundnuty.gitbooks.io/onedata-documentation/content/index.html/
 
 Author Information
 ------------------
 
-Marco Tanagaro (ma.tangaro_at_ibbe.cnr.it)
+Marco Tanagaro (ma.tangaro_at_ibiom.cnr.it)
