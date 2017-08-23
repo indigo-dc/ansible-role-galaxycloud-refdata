@@ -50,38 +50,73 @@ refdata_repository_name: '<repo_name>'
 ```
 Onedata space, CernVM-FS repository name or subdirectory to download local reference data.
 
-cvmfs variables
-******
+### cvmfs variables ###
 
-::
-
-  refdata_cvmfs_server_url: '90.147.102.186'
-
+```yaml
+refdata_cvmfs_server_url: '90.147.102.186'
+```
 Set CernVM-FS server (stratum 0 or Replica) address without 'http://' string, e.g. single ip address.
 
-::
-
-  refdata_cvmfs_repository_name: '{{ refdata_repository_name }}'
-
+```yaml
+  refdata_cvmfs_repository_name: 'refdata-italy.galaxy.refdata'
+```
 You can set a different cvmfs repository name, overwriting the default option, which point to refdata_repository_name.
 
-::
-  refdata_cvmfs_key_file: 'repository_key.pub'
-
+```yaml
+refdata_cvmfs_key_file: 'repository_key.pub'
+```
 SSH public key to mount the repository
 
-::
-
-  refdata_cvmfs_proxy_url: '{{ refdata_cvmfs_server_url }}'
-
+```yaml
+refdata_cvmfs_proxy_url: 'DIRECT'
+```
 Proxy address (default ``DIRECT``).
 
-::
-
+```yaml
   refdata_cvmfs_proxy_port: 80
-
+```
 Proxy port (default ``80``).
 
+### onedata variable s###
+
+::
+
+  refdata_provider: 'oneprovider2.cloud.ba.infn.it'
+
+Set reference data oneprovider
+
+::
+
+  refdata_token: 'MDAxNWxvY2F00aW9uIG9uZXpvbmUKMDAzYmlkZW500aWZpZXIgeExqMi00xdFN3YVp1VWIxM1dFSzRoNEdkb2x3cXVwTnpSaGZONXJSN2tZUQowMDFhY2lkIHRpbWUgPCAxNTI1MzM00NzgyCjAwMmZzaWduYXR1cmUgIOzeMtypO75nZvPJdAocInNbgH9zvJi6ifgXDrFVCr00K'
+
+Set reference data access token.
+
+::
+
+  refdata_space: '{{ refdata_repository_name }}'
+
+Set reference data space name.
+
+download
+********
+
+::
+
+  at10: false # A. thaliana (TAIR 10)
+  at9: false # A. thaliana (TAIR 9)
+  dm2: false # D. melanogaster (dm2)
+  dm3: false # D. melanogaster (dm3)
+  hg18: false # H. sapiens (hg18)
+  hg19: false # H. sapiens (hg19)
+  hg38: false # H. sapeins (hg38)
+  mm10: false # M. musculus (mm10)
+  mm8: false # M. musculus (mm9)
+  mm9: false # M. musculus (mm8)
+  sacCer1: false # S. cerevisiae (sacCer1)
+  sacCer2: false # S. cerevisiae (sacCer2)
+  sacCer3: true # S. cerevisiae (sacCer3)
+
+Select which reference data genome has to be downloaded.  
 
 
 
