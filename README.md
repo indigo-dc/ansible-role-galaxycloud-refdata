@@ -17,40 +17,41 @@ Moreover, this role, exploiting the python library Ephemeris, is able to check w
 
 Requirements
 ------------
+When a CernVM-FS server is used, the role run the indigo-dc.cvmfs-client ansible role as dependency to install and configure the cvmfs client.
+
 If the role use onedata to provide reference data, onedata command line tool ``oneclient`` needs to be installed on your system.
-The role depends on indigo-dc.oneclient role and install it automatically.
+In this case,the role is going to depend on indigo-dc.oneclient role and it will install oneclient automatically.
 
-When a CernVM-FS server is used, the role run indigo-dc.cvmfs-client is automatically run to install and configure the cvmfs client.
-
-Finally, if the download option is used, the role exploits a python script to download the reference data, which depends on python-pycurl.
+Finally, if the download option is selected, the role exploits a python script to download the reference data, which depends on python-pycurl (which is automatically installed).
 
 Role Variables
 --------------
-galaxy_flavor: "galaxy-no-tools" -> if different from 'galaxy-no-tools' check if all tools installed using https://github.com/indigo-dc/ansible-galaxy-tools have been correctly installed
+::
 
-get_refdata: true -> Enable reference data configuration.
+  galaxy_flavor: "galaxy-no-tools" 
 
-refdata_repository_name: 'repo_name' -> Onedata space, CernVM-FS repository name or subdirectory download dir.
+If different from 'galaxy-no-tools' the role will check if all tools installed using https://github.com/indigo-dc/ansible-galaxy-tools have been correctly installed. Possible ``galaxy_flavor`` value with the correspinding recipes are reported here: :doc:`feat_galaxy_tools`.
 
-refdata_provider_type: 'onedata' (default)
-1. onedata ------> Onedata space with reference data is mounted
-2. cvmfs --------> CernVM-FS repository with reference data is mounted
-3. download -----> Reference data download
+::
 
-refdata_provider: 'provider' -> Set onedata provider 
+  get_refdata: true
 
-refdata_token: 'access_token' -> Set onedata access token
+Enable reference data configuration. If set to ``false`` this variable disable reference data configuration.
 
-refdata_cvmfs_server_url: 'url' -> Set CernVM-FS server (stratum 0 or Replica) address without 'http://' string, e.g. single ip address.
+::
 
-refdata_cvmfs_repository_name: '{{ reponame }}' -> You can set a different cvmfs repository name, overwriting the default option, which point to refdata_repository_name.
+  refdata_provider_type: 'cvmfs'
 
-refdata_cvmfs_key_file: '{{ repokey }}' -> SSH public key to mount the repository
+Takes three possible values:
 
-refdata_cvmfs_proxy_url: '{{ url }}' -> proxy address
+#. ``cvmfs``: CernVM-FS repository with reference data is mounted
+#. ``onedata``: Onedata space with reference data is mounted
+#. ``download``: Reference data download
 
-refdata_cvmfs_proxy_port: 80 -> Proxy port
-
+```yaml
+refdata_repository_name: '<repo_name>'
+```
+Onedata space, CernVM-FS repository name or subdirectory to download local reference data.
 Dependencies
 ------------
 ```
@@ -70,14 +71,6 @@ Including an example of how to use your role (for instance, with variables passe
         - role: indigo-dc.galaxycloud-refdata
           galaxy_flavor: "galaxy-no-tools"
           get_refdata: true
-```
-2. Onedata configuration:
-```
-    - hosts: servers
-      roles:
-        - role: indigo-dc.galaxycloud-refdata
-          get_refdata: true
-          refdata_repository_name: 'onedata_space_name'
           refdata_provider_type: 'onedata'
           refdata_provider: 'oneprovider'
           refdata_token: 'access_token'
