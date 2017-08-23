@@ -26,22 +26,19 @@ Finally, if the download option is selected, the role exploits a python script t
 
 Role Variables
 --------------
-::
-
+```yaml
   galaxy_flavor: "galaxy-no-tools" 
-
+```
 If different from 'galaxy-no-tools' the role will check if all tools installed using https://github.com/indigo-dc/ansible-galaxy-tools have been correctly installed. Possible ``galaxy_flavor`` value with the correspinding recipes are reported here: :doc:`feat_galaxy_tools`.
 
-::
-
+```yaml
   get_refdata: true
-
+```
 Enable reference data configuration. If set to ``false`` this variable disable reference data configuration.
 
-::
-
-  refdata_provider_type: 'cvmfs'
-
+```yaml
+refdata_provider_type: 'cvmfs'
+```
 Takes three possible values:
 
 #. ``cvmfs``: CernVM-FS repository with reference data is mounted
@@ -52,6 +49,7 @@ Takes three possible values:
 refdata_repository_name: '<repo_name>'
 ```
 Onedata space, CernVM-FS repository name or subdirectory to download local reference data.
+
 Dependencies
 ------------
 ```
