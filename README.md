@@ -1,12 +1,11 @@
 Indigo-dc.galaxycloud-refdata
 =============================
-
 Reference data ansible role for indigo-dc.galaxycloud.
 The role provider reference data and the corresponding galaxy configuration.
 
-Three reference data source are supported
-- onedata ------> Onedata space with reference data is mounted
+Three reference data source are supported:
 - cvmfs --------> CernVM-FS repository with reference data is mounted
+- onedata ------> Onedata space with reference data is mounted
 - download -----> Reference data download
 
 1. A CernVM-FS server is used to provide reference data. It is mounted to /refdata.
@@ -16,6 +15,8 @@ Three reference data source are supported
    Onedata: https://groundnuty.gitbooks.io/onedata-documentation/content/index.html
 
 3. All the reference file are downloaded on /refdata (this needs >100GB free space on /refdata directory).
+
+This role, exploiting the python library Ephemeris, is also able to check which tools check which tools have been installed, s
 
 Requirements
 ------------
@@ -28,7 +29,6 @@ Finally, if the download option is used, the role exploits a python script to do
 
 Role Variables
 --------------
-
 galaxy_flavor: "galaxy-no-tools" -> if different from 'galaxy-no-tools' check if all tools installed using https://github.com/indigo-dc/ansible-galaxy-tools have been correctly installed
 
 get_refdata: true -> Enable reference data configuration.
