@@ -41,14 +41,49 @@ refdata_provider_type: 'cvmfs'
 ```
 Takes three possible values:
 
-#. ``cvmfs``: CernVM-FS repository with reference data is mounted
-#. ``onedata``: Onedata space with reference data is mounted
-#. ``download``: Reference data download
+1. ``cvmfs``: CernVM-FS repository with reference data is mounted
+2. ``onedata``: Onedata space with reference data is mounted
+3. ``download``: Reference data download
 
 ```yaml
 refdata_repository_name: '<repo_name>'
 ```
 Onedata space, CernVM-FS repository name or subdirectory to download local reference data.
+
+cvmfs variables
+******
+
+::
+
+  refdata_cvmfs_server_url: '90.147.102.186'
+
+Set CernVM-FS server (stratum 0 or Replica) address without 'http://' string, e.g. single ip address.
+
+::
+
+  refdata_cvmfs_repository_name: '{{ refdata_repository_name }}'
+
+You can set a different cvmfs repository name, overwriting the default option, which point to refdata_repository_name.
+
+::
+  refdata_cvmfs_key_file: 'repository_key.pub'
+
+SSH public key to mount the repository
+
+::
+
+  refdata_cvmfs_proxy_url: '{{ refdata_cvmfs_server_url }}'
+
+Proxy address (default ``DIRECT``).
+
+::
+
+  refdata_cvmfs_proxy_port: 80
+
+Proxy port (default ``80``).
+
+
+
 
 Dependencies
 ------------
