@@ -4,19 +4,16 @@ Reference data ansible role for indigo-dc.galaxycloud.
 The role provider reference data and the corresponding galaxy configuration.
 
 Three reference data source are supported:
-- cvmfs --------> CernVM-FS repository with reference data is mounted
-- onedata ------> Onedata space with reference data is mounted
-- download -----> Reference data download
+1. cvmfs: CernVM-FS repository is used to provide reference data. It is mounted to ``/refdata``.
+2. onedata: Onedata space hosting reference data is mounted to ``/refdata``.
+3. download: Reference data are downloaded in ``/refdata`` (requires >100GB free space available on /refdata directory).
 
-1. A CernVM-FS server is used to provide reference data. It is mounted to /refdata.
-   CernVM-FS: http://cvmfs.readthedocs.io/en/stable/index.html
+Moreover, this role, exploiting the python library Ephemeris, is able to check which tools have been installed through indigo-dc.galaxy-tools ansible role, and returns
 
-2. A space hosting the reference data is mounted, exploiting onedata, to /refdata.
-   Onedata: https://groundnuty.gitbooks.io/onedata-documentation/content/index.html
+- the list of installed tools stored in ``/var/log/galaxy/galaxy-installed-tool-list.yml`` in yaml format
+- the list of missing tools stored in ``/var/log/galaxy/galaxy-missing-tool-list.yml`` in yaml format
 
-3. All the reference file are downloaded on /refdata (this needs >100GB free space on /refdata directory).
-
-This role, exploiting the python library Ephemeris, is also able to check which tools check which tools have been installed, s
+ This option has been introduced for galaxy tools automatic deployment. If you need to install and configure reference data, you can disable it using ``galaxy_flavor: "galaxy-no-tools``.
 
 Requirements
 ------------
