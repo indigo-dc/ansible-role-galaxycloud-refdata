@@ -58,7 +58,7 @@ refdata_cvmfs_server_url: '90.147.102.186'
 Set CernVM-FS server (stratum 0 or Replica) address without 'http://' string, e.g. single ip address.
 
 ```yaml
-  refdata_cvmfs_repository_name: 'refdata-italy.galaxy.refdata'
+refdata_cvmfs_repository_name: 'refdata-italy.galaxy.refdata'
 ```
 You can set a different cvmfs repository name, overwriting the default option, which point to refdata_repository_name.
 
@@ -73,60 +73,71 @@ refdata_cvmfs_proxy_url: 'DIRECT'
 Proxy address (default ``DIRECT``).
 
 ```yaml
-  refdata_cvmfs_proxy_port: 80
+refdata_cvmfs_proxy_port: 80
 ```
 Proxy port (default ``80``).
 
-### onedata variable s###
+### onedata variable ###
 
-::
-
-  refdata_provider: 'oneprovider2.cloud.ba.infn.it'
-
+```yaml
+refdata_provider: 'oneprovider2.cloud.ba.infn.it'
+```
 Set reference data oneprovider
 
-::
-
-  refdata_token: 'MDAxNWxvY2F00aW9uIG9uZXpvbmUKMDAzYmlkZW500aWZpZXIgeExqMi00xdFN3YVp1VWIxM1dFSzRoNEdkb2x3cXVwTnpSaGZONXJSN2tZUQowMDFhY2lkIHRpbWUgPCAxNTI1MzM00NzgyCjAwMmZzaWduYXR1cmUgIOzeMtypO75nZvPJdAocInNbgH9zvJi6ifgXDrFVCr00K'
-
+```yaml
+refdata_token: 'MDAxNWxvY2F00aW9uIG9uZXpvbmUKMDAzYmlkZW500aWZpZXIgeExqMi00xdFN3YVp1VWIxM1dFSzRoNEdkb2x3cXVwTnpSaGZONXJSN2tZUQowMDFhY2lkIHRpbWUgPCAxNTI1MzM00NzgyCjAwMmZzaWduYXR1cmUgIOzeMtypO75nZvPJdAocInNbgH9zvJi6ifgXDrFVCr00K'
+```
 Set reference data access token.
 
-::
-
-  refdata_space: '{{ refdata_repository_name }}'
-
+```yaml
+refdata_space: '{{ refdata_repository_name }}'
+```
 Set reference data space name.
 
-download
-********
+### download ###
 
-::
-
-  at10: false # A. thaliana (TAIR 10)
-  at9: false # A. thaliana (TAIR 9)
-  dm2: false # D. melanogaster (dm2)
-  dm3: false # D. melanogaster (dm3)
-  hg18: false # H. sapiens (hg18)
-  hg19: false # H. sapiens (hg19)
-  hg38: false # H. sapeins (hg38)
-  mm10: false # M. musculus (mm10)
-  mm8: false # M. musculus (mm9)
-  mm9: false # M. musculus (mm8)
-  sacCer1: false # S. cerevisiae (sacCer1)
-  sacCer2: false # S. cerevisiae (sacCer2)
-  sacCer3: true # S. cerevisiae (sacCer3)
-
+```yaml
+at10: false # A. thaliana (TAIR 10)
+at9: false # A. thaliana (TAIR 9)
+dm2: false # D. melanogaster (dm2)
+dm3: false # D. melanogaster (dm3)
+hg18: false # H. sapiens (hg18)
+hg19: false # H. sapiens (hg19)
+hg38: false # H. sapeins (hg38)
+mm10: false # M. musculus (mm10)
+mm8: false # M. musculus (mm9)
+mm9: false # M. musculus (mm8)
+sacCer1: false # S. cerevisiae (sacCer1)
+sacCer2: false # S. cerevisiae (sacCer2)
+sacCer3: true # S. cerevisiae (sacCer3)
+```
 Select which reference data genome has to be downloaded.  
-
-
 
 Dependencies
 ------------
-```
-dependencies:
-  - { role: indigo-dc.oneclient, when: refdata_provider_type == 'onedata' }
-  - { role: mtangaro.cvmfs-client, server_url: '{{ refdata_cvmfs_server_url }}', repository_name: '{{ refdata_cvmfs_repository_name }}', cvmfs_public_key: '{{ refdata_cvmfs_key_file }}', proxy_url: '{{ refdata_cvmfs_proxy_url }}', proxy_port: '{{ refdata_cvmfs_proxy_port }}', cvmfs_mountpoint: '{{ refdata_dir }}', when: refdata_provider_type == 'cvmfs' }
-```
+For cvmfs server reference data providere, the role depends on indigo-dc.cvmfs-client role, which takes as input parameters the CernVM-FS server location details (stratum 0 address, public key and mount point).
+
+```yaml
+- hosts: servers
+    roles:
+      - role: indigo-dc.cvmfs-client
+        server_url: '90.147.102.186'
+        repository_name: 'elixir-italy.galaxy.refdata'
+        cvmfs_public_key: 'elixir-italy.galaxy.refdata.pub'
+        proxy_url: 'DIRECT'
+        proxy_port: '80'
+        cvmfs_mountpoint: '/refdata'
+        when:  refdata_provider_type == 'cvmfs'
+
+For onedata reference data provider, the role depends on indigo-dc.oneclient role:
+
+::
+
+  - hosts: servers
+    roles:
+      - role: indigo-dc.oneclient
+        when: refdata_provider_type == 'onedata'
+
 Example Playbook
 ----------------
 
