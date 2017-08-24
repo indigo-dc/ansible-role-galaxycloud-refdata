@@ -26,73 +26,37 @@ Finally, if the download option is selected, the role exploits a python script t
 
 Role Variables
 --------------
-```yaml
-  galaxy_flavor: "galaxy-no-tools" 
-```
-If different from 'galaxy-no-tools' the role will check if all tools installed using https://github.com/indigo-dc/ansible-galaxy-tools have been correctly installed. Possible ``galaxy_flavor`` value with the correspinding recipes are reported here: :doc:`feat_galaxy_tools`.
+``galaxy_flavor``: if different from 'galaxy-no-tools' the role will check if all tools installed using https://github.com/indigo-dc/ansible-galaxy-tools have been correctly installed. Possible *galaxy_flavor* values with the correspinding recipes are reported here: :doc:`feat_galaxy_tools` (default: ``galaxy-no-tools``).
 
-```yaml
-  get_refdata: true
-```
-Enable reference data configuration. If set to ``false`` this variable disable reference data configuration.
+``get_refdata``: enable reference data configuration. If set to ``false`` this variable disable reference data configuration (default: ``true``).
 
-```yaml
-refdata_provider_type: 'cvmfs'
-```
-Takes three possible values:
+``refdata_provider_type``: takes three possible values:
 
-1. ``cvmfs``: CernVM-FS repository with reference data is mounted
-2. ``onedata``: Onedata space with reference data is mounted
-3. ``download``: Reference data download
+  #. ``cvmfs``: CernVM-FS repository with reference data is mounted
+  #. ``onedata``: Onedata space with reference data is mounted
+  #. ``download``: Reference data download
 
-```yaml
-refdata_repository_name: '<repo_name>'
-```
-Onedata space, CernVM-FS repository name or subdirectory to download local reference data.
+``refdata_repository_name``: onedata space, CernVM-FS repository name or subdirectory to download local reference data.
 
 ### cvmfs variables ###
 
-```yaml
-refdata_cvmfs_server_url: '90.147.102.186'
-```
-Set CernVM-FS server (stratum 0 or Replica) address without 'http://' string, e.g. single ip address.
+``refdata_cvmfs_server_url``: set CernVM-FS server (stratum 0 or Replica) address without 'http://' string, e.g. single ip address.
 
-```yaml
-refdata_cvmfs_repository_name: 'refdata-italy.galaxy.refdata'
-```
-You can set a different cvmfs repository name, overwriting the default option, which point to refdata_repository_name.
+``refdata_cvmfs_repository_name``: set a different cvmfs repository name, overwriting the default option, which point to refdata_repository_name (e.g. ``elixir-italy.galaxy.refdata``).
 
-```yaml
-refdata_cvmfs_key_file: 'repository_key.pub'
-```
-SSH public key to mount the repository
+``refdata_cvmfs_key_file``: SSH public key to mount the repository
 
-```yaml
-refdata_cvmfs_proxy_url: 'DIRECT'
-```
-Proxy address (default ``DIRECT``).
+``refdata_cvmfs_proxy_url``: proxy address (default ``DIRECT``).
 
-```yaml
-refdata_cvmfs_proxy_port: 80
-```
-Proxy port (default ``80``).
+``refdata_cvmfs_proxy_port``: proxy port (default ``80``).
 
-### onedata variable ###
+### onedata variables ###
 
-```yaml
-refdata_provider: 'oneprovider2.cloud.ba.infn.it'
-```
-Set reference data oneprovider
+``refdata_provider``: set reference data oneprovider (e.g. ``oneprovider2.cloud.ba.infn.it``).
 
-```yaml
-refdata_token: 'MDAxNWxvY2F00aW9uIG9uZXpvbmUKMDAzYmlkZW500aWZpZXIgeExqMi00xdFN3YVp1VWIxM1dFSzRoNEdkb2x3cXVwTnpSaGZONXJSN2tZUQowMDFhY2lkIHRpbWUgPCAxNTI1MzM00NzgyCjAwMmZzaWduYXR1cmUgIOzeMtypO75nZvPJdAocInNbgH9zvJi6ifgXDrFVCr00K'
-```
-Set reference data access token.
+``refdata_token`` set reference data access token (e.g. ``MDAxNWxvY2F00aW9uIG9uZXpvbmUKMDAzYmlkZW500aWZpZXIgeExqMi00xdFN3YVp1VWIxM1dFSzRoNEdkb2x3cXVwTnpSaGZONXJSN2tZUQowMDFhY2lkIHRpbWUgPCAxNTI1MzM00NzgyCjAwMmZzaWduYXR1cmUgIOzeMtypO75nZvPJdAocInNbgH9zvJi6ifgXDrFVCr00K``).
 
-```yaml
-refdata_space: '{{ refdata_repository_name }}'
-```
-Set reference data space name.
+``refdata_space``: set reference data space name.
 
 ### download ###
 
