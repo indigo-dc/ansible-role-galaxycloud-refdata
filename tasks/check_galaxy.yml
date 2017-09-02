@@ -7,6 +7,8 @@
 
 - name: Check Galaxy stats server
   shell: '/usr/bin/python /tmp/check_galaxy.py'
+  become_user: root
+  become_method: sudo
 
 - name: Check if Galaxy is online
   uri:
