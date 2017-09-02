@@ -82,6 +82,11 @@ refdata_cvmfs_proxy_url: '{{ refdata_cvmfs_server_url }}'
 refdata_cvmfs_proxy_port: 80
 
 #________________________________
+# Missing tools
+
+galaxy_tools_base_dir: '/tmp'
+
+#________________________________
 # Path
 
 galaxy_refdata_list_path: '/tmp'
