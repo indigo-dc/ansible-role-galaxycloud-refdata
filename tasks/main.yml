@@ -6,6 +6,12 @@
 - include: prerequisites.yml
   when: galaxy_installed.stat.exists
 
+- name: Get missing tool list
+  include: get-missing-tools-list.yml
+  when: galaxy_installed.stat.exists and galaxy_flavor != 'galaxy-no-tools'
+  become_user: '{{ galaxy_user }}'
+  become: true
+
 - name: Install and Configure Reference Data
   include: install.yml
   when: galaxy_installed.stat.exists and get_refdata
