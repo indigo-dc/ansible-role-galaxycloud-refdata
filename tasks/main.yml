@@ -6,6 +6,9 @@
 - include: prerequisites.yml
   when: galaxy_installed.stat.exists
 
+- include: check_galaxy.yml
+  when: galaxy_installed.stat.exists
+
 - name: Install and Configure Reference Data
   include: install.yml
   when: galaxy_installed.stat.exists and get_refdata
