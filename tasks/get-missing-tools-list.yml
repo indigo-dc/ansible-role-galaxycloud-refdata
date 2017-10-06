@@ -24,6 +24,6 @@
     dest: '/tmp/compare.py'
 
 - name: Get missing tool list
-  command: '{{galaxy_venv_path}}/bin/python /tmp/compare.py -f /tmp/{{ galaxy_flavor }}-tool-list.yml -i {{ galaxy_log_path }}/galaxy-installed-tool-list.yml -o {{ galaxy_log_path }}/galaxy-missing-tool-list.yml'
+  command: '{{galaxy_venv_path}}/bin/python /tmp/compare.py -f {{ galaxy_log_path }}/{{ galaxy_flavor }}-tool-list.yml -i {{ galaxy_log_path }}/galaxy-installed-tool-list.yml -o {{ galaxy_log_path }}/galaxy-missing-tool-list.yml'
   environment:
     VIRTUAL_ENV: "{{ galaxy_venv_path }}"
