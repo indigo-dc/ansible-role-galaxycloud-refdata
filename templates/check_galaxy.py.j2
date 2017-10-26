@@ -32,7 +32,7 @@ def check_galaxy():
   server = stats.GetUwsgiStatsServer()
 
   if server is False:
-    galaxyctl.restart_galaxy(galaxy_config_file, wait_time, True, retry_number)
+    galaxyctl.restart_galaxy(galaxy_config_file, wait_time, True, retries_number)
   else:
     galaxyctl.galaxy_workers_check(galaxy_config_file, wait_time)
     galaxyctl.galaxy_startup_check(galaxy_config_file, wait_time)
