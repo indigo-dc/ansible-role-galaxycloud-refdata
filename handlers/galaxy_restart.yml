@@ -1,11 +1,36 @@
 ---
-- name: Restart Galaxy
-  command: "{{ galaxy_custom_script_path }}/galaxyctl restart galaxy --force"
+- name: Set galaxy restart command
+  set_fact:
+    galaxy_restart: "{{ galaxy_custom_script_path }}/galaxyctl restart galaxy --force"
+
+#______________________________________
+# Docker restart galaxy only if running.
+
+- name: '[Docker] check if galaxy is running'
+  stat: path=/var/log/galaxy/uwsgi.pid
+  register: galaxy_pid 
+  when: ansible_virtualization_type == "docker"
+
+- name: '[Docker] Restart Galaxy'
+  command: '{{ galaxy_restart }}'
   ignore_errors: yes
   become_user: root
   become_method: sudo
+  when:
+    - galaxy_pid.stat.exists
+    - ansible_virtualization_type == "docker"
 
-- name: Check if Galaxy is on line
+#______________________________________
+# VM (always restart galaxy, to ensure it is running).
+
+- name: '[VM] Restart Galaxy'
+  command: '{{ galaxy_restart }}'
+  ignore_errors: yes
+  become_user: root
+  become_method: sudo
+  when: ansible_virtualization_type != "docker"
+
+- name: '[VM] Check if Galaxy is on line'
   uri:
     url: '{{ galaxy_instance_url }}'
   register: result
