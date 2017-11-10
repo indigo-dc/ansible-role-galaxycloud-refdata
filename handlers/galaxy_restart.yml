@@ -7,7 +7,7 @@
 # Docker restart galaxy only if running.
 
 - name: '[Docker] check if galaxy is running'
-  stat: '/var/log/galaxy/uwsgi.pid'
+  stat: path=/var/log/galaxy/uwsgi.pid
   register: galaxy_pid 
   when: ansible_virtualization_type == "docker"
 
