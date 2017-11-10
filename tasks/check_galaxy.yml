@@ -17,3 +17,4 @@
   until: result.status == 200
   retries: 30
   delay: 10
+  when: ansible_virtualization_type != "docker"
