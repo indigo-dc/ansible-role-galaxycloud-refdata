@@ -25,6 +25,7 @@
     - { j2_file: "bwa_index.loc.j2", loc_file: "bwa_index.loc" }
     - { j2_file: "bowtie_indices.loc.j2", loc_file: "bowtie_indices.loc" }
     - { j2_file: "fasta_indexes.loc.j2", loc_file: "fasta_indexes.loc" }
+    - { j2_file: "all_fasta.loc.j2 ", loc_file: "all_fasta.loc.j2 " }
     - { j2_file: "liftOver.loc.j2", loc_file: "liftOver.loc" }
   notify:
     - restart galaxy
