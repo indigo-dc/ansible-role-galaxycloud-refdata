@@ -21,8 +21,13 @@
     dest: "{{ galaxy_tool_data_table_conf_path }}/{{ item.loc_file }}"
     force: yes
   with_items:
+    - { j2_file: "bowtie2_indices.loc.j2", loc_file: "bowtie2_indices.loc" }
+    - { j2_file: "bwa_index.loc.j2", loc_file: "bwa_index.loc" }
+    - { j2_file: "bwa_mem_index.loc.j2", loc_file: "bwa_mem_index.loc" }
     - { j2_file: "bowtie_indices.loc.j2", loc_file: "bowtie_indices.loc" }
     - { j2_file: "fasta_indexes.loc.j2", loc_file: "fasta_indexes.loc" }
+    - { j2_file: "all_fasta.loc.j2", loc_file: "all_fasta.loc" }
+    - { j2_file: "lastz_seqs.loc.j2", loc_file: "lastz_seqs.loc" }
     - { j2_file: "liftOver.loc.j2", loc_file: "liftOver.loc" }
   notify:
     - restart galaxy
