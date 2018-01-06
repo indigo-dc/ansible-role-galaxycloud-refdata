@@ -50,18 +50,4 @@
     supervisord_conf_path: '/etc/supervisor'
   when: ansible_os_family == "Debian" and init_type == "supervisord"
 
-- name: Check for galaxyctl script
-  stat: path='{{ galaxy_custom_script_path }}/galaxyctl'
-  register: galaxyctl_installed
-
-- name: Copy Galaxy management script
-  template:
-    src: '{{ item.src }}'
-    dest: '{{ item.dest }}'
-    mode: '{{ item.mode }}'
-  with_items:
-    - { src: 'galaxyctl_libs.py.j2', dest: '{{ galaxy_custom_script_path }}/galaxyctl_libs.py', mode: 'a+x' }
-    - { src: 'galaxyctl.py.j2', dest: '{{ galaxy_custom_script_path }}/galaxyctl', mode: 'a+x' }
-  become_user: root
-  become_method: sudo
-  when: not galaxyctl_installed.stat.exists
+- include: install_galaxyctl.yml
