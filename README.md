@@ -115,7 +115,7 @@ Example Playbook
       refdata_provider_type: 'cvmfs'
       refdata_cvmfs_server_url: '90.147.102.186'
       refdata_cvmfs_repository_name: 'elixir-italy.galaxy.refdata'
-      refdata_cvmfs_key_file: 'elixir-italy.galaxy.refdata'
+      refdata_cvmfs_key_file: 'elixir-italy.galaxy.refdata.pub'
       refdata_cvmfs_proxy_url: 'DIRECT'
 ```
 
