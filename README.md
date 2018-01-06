@@ -169,7 +169,7 @@ Galaxy project: https://galaxyproject.org
 
 CernVM-FS: http://cvmfs.readthedocs.io/en/stable/index.html
 
-Onedata: https://groundnuty.gitbooks.io/onedata-documentation/content/index.html/
+Onedata: https://groundnuty.gitbooks.io/onedata-documentation/content/index.html
 
 Author Information
 ------------------
