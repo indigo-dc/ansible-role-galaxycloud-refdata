@@ -3,9 +3,11 @@
   shell: 'oneclient -H {{ refdata_provider }} -t {{ refdata_token }} {{ refdata_dir }} --insecure -o ro'
 
 - name: Copy onedatactl.ini file
-  template:
-    src: 'onedatactl.ini.j2'
+  copy:
+    src: '/etc/galaxyctl/onedatactl.ini.j2'
     dest: '{{ onedatactl_config_file }}'
+    force: no
+    remote_serc: yes
   become_user: root
   become_method: sudo
 
