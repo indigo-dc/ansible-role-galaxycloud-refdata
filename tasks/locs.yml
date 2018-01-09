@@ -23,6 +23,7 @@
   with_items:
     - { j2_file: "bowtie2_indices.loc.j2", loc_file: "bowtie2_indices.loc" }
     - { j2_file: "bwa_index.loc.j2", loc_file: "bwa_index.loc" }
+    - { j2_file: "bwa_index_color.loc.j2", loc_file: "bwa_index_color.loc" }
     - { j2_file: "bwa_mem_index.loc.j2", loc_file: "bwa_mem_index.loc" }
     - { j2_file: "bowtie_indices.loc.j2", loc_file: "bowtie_indices.loc" }
     - { j2_file: "fasta_indexes.loc.j2", loc_file: "fasta_indexes.loc" }
