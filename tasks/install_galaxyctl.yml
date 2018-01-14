@@ -72,12 +72,22 @@
     clone: yes
     dest: '{{ galaxy_FS_path }}/galaxyctl'
 
+- set_fact:
+    pip_exe: '/usr/bin/pip'
+  when: ansible_os_family == "Debian"
+
+- set_fact:
+    pip_exe: '/bin/pip'
+  when: ansible_os_family == "RedHat"
+
 - name: Install galaxyctl
-  command: 'pip install .'
-  args:
-    chdir: '{{ galaxy_FS_path }}/galaxyctl'
+  pip:
+    name: . # install local package
+    chdir: '/home/galaxy/galaxyctl'
+    executable: '{{ pip_exe }}'
   become_user: root
   become_method: sudo
+  when: galaxyctl_is_installed.rc != 0
 
 - name: Edit galaxyctl ini file
   ini_file:
