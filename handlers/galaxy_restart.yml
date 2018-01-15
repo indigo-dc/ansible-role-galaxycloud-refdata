@@ -1,7 +1,7 @@
 ---
 - name: Set galaxy restart command
   set_fact:
-    galaxy_restart: "{{ galaxy_custom_script_path }}/galaxyctl restart galaxy --force"
+    galaxy_restart: "/usr/bin/galaxyctl restart galaxy --force"
 
 #______________________________________
 # Docker restart galaxy only if running.

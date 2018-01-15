@@ -1,16 +1,13 @@
 ---
-- name: Copy onedatactl.py script
-  template:
-    src: 'onedatactl.py.j2'
-    dest: '{{ galaxy_custom_script_path }}/onedatactl'
-    mode: 'a+x'
-  become_user: root
-  become_method: sudo
+- name: Mount Onedata  Reference Data space
+  shell: 'oneclient -H {{ refdata_provider }} -t {{ refdata_token }} {{ refdata_dir }} --insecure -o ro'
 
 - name: Copy onedatactl.ini file
-  template:
-    src: 'onedatactl.ini.j2'
+  copy:
+    src: '/etc/galaxyctl/onedatactl.ini.j2'
     dest: '{{ onedatactl_config_file }}'
+    force: no
+    remote_serc: yes
   become_user: root
   become_method: sudo
 
@@ -24,8 +21,9 @@
     - { section: 'refdata', option: 'mountpoint', value: '{{ refdata_dir }}' }
     - { section: 'refdata', option: 'provider', value: '{{ refdata_provider }}' }
     - { section: 'refdata', option: 'token', value: '{{ refdata_token }}' }
+    - { section: 'refdata', option: 'insecure', value: '{{ insecure }}' }
+    - { section: 'refdata', option: 'nonempty', value: '{{ nonempty }}' }
+    - { section: 'refdata', option: 'uid', value: '{{ uid }}' }
+    - { section: 'refdata', option: 'gid', value: '{{ gid }}' }
   become_user: root
   become_method: sudo
-
-- name: Mount Onedata  Reference Data space
-  shell: 'oneclient -H {{ refdata_provider }} -t {{ refdata_token }} {{ refdata_dir }} --insecure -o ro'

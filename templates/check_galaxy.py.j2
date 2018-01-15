@@ -1,14 +1,14 @@
 #!/usr/bin/env python
-# ELIXIR-ITALY
-# INDIGO-DataCloud
-# IBIOM-CNR
-#
-# Contributors:
-# author: Tangaro Marco
-# email: ma.tangaro@ibiom.cnr.it
+"""
+ELIXIR-ITALY
+IBIOM-CNR
+
+Contributors:
+author: Tangaro Marco
+email: ma.tangaro@ibiom.cnr.it
+"""
 
 galaxy_config_file = '{{ galaxy_config_file }}'
-galaxyctl_path='{{ galaxy_custom_script_path }}'
 wait_time = 300
 retries_number = 5
 
@@ -16,16 +16,12 @@ retries_number = 5
 def check_galaxy():
 
   # Import galaxyctl_libs
-  import sys
-  sys.path.append(galaxyctl_path)
-  from galaxyctl_libs import UwsgiStatsServer
-  from galaxyctl_libs import bcolors
-
+  from galaxyctl import bcolors
+  from galaxyctl import UwsgiStatsServer
 
   # Import galaxyctl start/stop/restart
-  import os, imp
-  os.chdir(galaxyctl_path)
-  galaxyctl = imp.load_source('galaxyctl', 'galaxyctl')
+  import imp
+  galaxyctl = imp.load_source('galaxyctl', '/usr/bin/galaxyctl')
 
   # Check Galaxy
   stats = UwsgiStatsServer(timeout=wait_time, fname=galaxy_config_file)
