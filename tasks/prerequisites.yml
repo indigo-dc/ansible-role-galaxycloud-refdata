@@ -14,40 +14,4 @@
   become_user: root
   become_method: sudo
 
-#______________________________________
-# Install dependencies
-
-- name: '[EL] Install packages'
-  yum:
-    name: '{{ item }}'
-    state: present
-  with_items:
-    - lsof
-  become_user: root
-  become_method: sudo
-  when: ansible_os_family == "RedHat"
-
-- name: '[Ubuntu] Install packages'
-  apt:
-    name: '{{ item }}'
-    state: present
-  with_items:
-    - lsof
-  become_user: root
-  become_method: sudo
-  when: ansible_os_family == "Debian"
-
-#______________________________________
-# Install galaxyctl scripts
-
-- name: '[EL] Set supervisord conf path'
-  set_fact:
-    supervisord_conf_path: '/etc'
-  when: ansible_os_family == "RedHat" and init_type == "supervisord"
-
-- name: '[Ubuntu] Set supervisord conf path'
-  set_fact:
-    supervisord_conf_path: '/etc/supervisor'
-  when: ansible_os_family == "Debian" and init_type == "supervisord"
-
-- include: install_galaxyctl.yml
+#- include: install_galaxyctl.yml
