@@ -88,7 +88,7 @@ For cvmfs server reference data providere, the role depends on indigo-dc.cvmfs-c
       server_url: '90.147.102.186'
       repository_name: 'elixir-italy.galaxy.refdata'
       cvmfs_public_key: 'elixir-italy.galaxy.refdata.pub'
-      proxy_url: 'DIRECT
+      proxy_url: 'DIRECT'
       proxy_port: '80'
       cvmfs_mountpoint: '/refdata'
       when:  refdata_provider_type == 'cvmfs'
@@ -115,7 +115,7 @@ Example Playbook
       refdata_provider_type: 'cvmfs'
       refdata_cvmfs_server_url: '90.147.102.186'
       refdata_cvmfs_repository_name: 'elixir-italy.galaxy.refdata'
-      refdata_cvmfs_key_file: 'elixir-italy.galaxy.refdata'
+      refdata_cvmfs_key_file: 'elixir-italy.galaxy.refdata.pub'
       refdata_cvmfs_proxy_url: 'DIRECT'
 ```
 
@@ -169,7 +169,7 @@ Galaxy project: https://galaxyproject.org
 
 CernVM-FS: http://cvmfs.readthedocs.io/en/stable/index.html
 
-Onedata: https://groundnuty.gitbooks.io/onedata-documentation/content/index.html/
+Onedata: https://groundnuty.gitbooks.io/onedata-documentation/content/index.html
 
 Author Information
 ------------------
