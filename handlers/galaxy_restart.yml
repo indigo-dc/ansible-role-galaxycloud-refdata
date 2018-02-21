@@ -1,7 +1,7 @@
 ---
 - name: Set galaxy restart command
   set_fact:
-    galaxy_restart: "/usr/bin/galaxyctl restart galaxy --force"
+    galaxy_restart: "{{ galaxyctl_bin_path }}/galaxyctl restart galaxy --force"
 
 #______________________________________
 # Docker restart galaxy only if running.
@@ -17,8 +17,8 @@
   become_user: root
   become_method: sudo
   when:
-    - galaxy_pid.stat.exists
     - ansible_virtualization_type == "docker"
+    - galaxy_pid.stat.exists
 
 #______________________________________
 # VM (always restart galaxy, to ensure it is running).

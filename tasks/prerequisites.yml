@@ -1,4 +1,5 @@
 ---
+#______________________________________
 # Create directories for reference data and logs
 
 - name: Create directories
@@ -14,4 +15,16 @@
   become_user: root
   become_method: sudo
 
+#______________________________________
+# Set Galaxyctl path
+- set_fact:
+    galaxyctl_bin_path: '/usr/bin'
+  when: ansible_os_family == "RedHat"
+
+- set_fact:
+    galaxyctl_bin_path: '/usr/local/bin'
+  when: ansible_os_family == "Debian"
+
+#______________________________________
+# Install Galaxyctl
 #- include: install_galaxyctl.yml

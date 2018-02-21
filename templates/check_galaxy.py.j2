@@ -21,7 +21,7 @@ def check_galaxy():
 
   # Import galaxyctl start/stop/restart
   import imp
-  galaxyctl = imp.load_source('galaxyctl', '/usr/bin/galaxyctl')
+  galaxyctl = imp.load_source('galaxyctl', '{{ galaxyctl_bin_path }}/galaxyctl')
 
   # Check Galaxy
   stats = UwsgiStatsServer(timeout=wait_time, fname=galaxy_config_file)
