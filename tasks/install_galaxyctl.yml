@@ -99,7 +99,7 @@
 - name: Install galaxyctl
   pip:
     name: . # install local package
-    chdir: '{{  galaxyctl_path }}'
+    chdir: '{{ galaxyctl_path }}'
     executable: '{{ pip_exe }}'
   become_user: root
   become_method: sudo
