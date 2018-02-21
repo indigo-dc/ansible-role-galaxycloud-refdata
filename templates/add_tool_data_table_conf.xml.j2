@@ -23,28 +23,25 @@
         <columns>value, dbkey, name, path</columns>
         <file path="tool-data/fasta_indexes.loc" />
     </table>
-    <!-- Locations for lastz_seqs indexes -->
     <table name="lastz_seqs" comment_char="#">
         <columns>value, name, path</columns>
         <file path="tool-data/lastz_seqs.loc" />
     </table>
-    <!-- Locations of indexes in the BWA mem mapper format -->
-    <table name="bwa_mem_indexes" comment_char="#">
-        <columns>value, dbkey, name, path</columns>
-        <file path="tool-data/bwa_mem_index.loc" />
-    </table>
-    <!-- Locations of gtf for featurecounts indexes pietro -->
+    <!-- Locations of gtf for featurecounts indexes  -->
     <table name="gene_sets" comment_char="#">
         <columns>value, dbkey, name, path</columns>
         <file path="tool-data/gene_sets.loc" />
     </table>
-    <!-- Locations of rRNAdatabse forsortmerna indexes pietro -->
+    <!-- Locations of gff for bedtools indexes  -->
+    <table name="all_gff" comment_char="#">
+        <columns>value, dbkey, name, path</columns>
+        <file path="tool-data/all_gff.loc" />
+    </table>
+    <!-- Locations of rRNAdatabse forsortmerna indexes  -->
     <table name="rRNA_databases" comment_char="#">
         <columns>value, name, path</columns>
         <file path="tool-data/rRNA_databases.loc" />
     </table>
-    <!-- Locations of all rsem reference files under genome directory -->
-    <table name="rsem_indexes" comment_char="#">
-        <columns>value, dbkey, name, path</columns>
-        <file path="tool-data/rsem_indices.loc" />
-    </table>
+<!-- END ELIXIR-ITA customization-->
+</tables>
+
