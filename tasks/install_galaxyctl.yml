@@ -66,24 +66,40 @@
    - ansible_os_family == "Debian"
    - init_type == "supervisord"
 
-- name: 'Clone Galaxy Central Management Tool (galaxyctl)'
-  git:
-    repo: 'https://github.com/mtangaro/galaxyctl.git'
-    clone: yes
-    dest: '{{ galaxy_FS_path }}/galaxyctl'
-
 - set_fact:
     pip_exe: '/bin/pip'
+    galaxyctl_bin_path: '/usr/bin'
   when: ansible_os_family == "RedHat"
 
 - set_fact:
     pip_exe: '/usr/bin/pip'
+    galaxyctl_bin_path: '/usr/local/bin'
   when: ansible_os_family == "Debian"
+
+- name: Check galaxyctl
+  command: '{{ galaxyctl_bin_path }}/galaxyctl --version'
+  ignore_errors: true
+  changed_when: false # read-only task
+  register: galaxyctl_is_installed
+  become_user: root
+  become_method: sudo
+
+- set_fact:
+    galaxyctl_path: '{{ galaxy_FS_path }}/.galaxyctl'
+  when: galaxyctl_is_installed.rc != 0
+
+- name: 'Clone Galaxy Central Management Tool (galaxyctl)'
+  git:
+    repo: 'https://github.com/mtangaro/galaxyctl.git'
+    clone: yes
+    update: yes
+    dest: '{{ galaxyctl_path }}'
+  when: galaxyctl_is_installed.rc != 0
 
 - name: Install galaxyctl
   pip:
     name: . # install local package
-    chdir: '/home/galaxy/galaxyctl'
+    chdir: '{{ galaxyctl_path }}'
     executable: '{{ pip_exe }}'
   become_user: root
   become_method: sudo
