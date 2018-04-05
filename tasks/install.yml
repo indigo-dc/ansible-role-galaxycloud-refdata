@@ -15,3 +15,5 @@
   template:
     src: 'indigo-dc.galaxycloud-refdata.lock.j2'
     dest: '{{lock_file_path}}/indigo-dc.galaxycloud-refdata.lock'
+  become_user: root
+  become_method: sudo
