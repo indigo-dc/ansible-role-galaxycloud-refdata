@@ -1,6 +1,10 @@
 ---
 - name: Create tool_data_conf.xml file
-  copy: src={{galaxy_config_path}}/tool_data_table_conf.xml.sample dest={{galaxy_config_path}}/tool_data_table_conf.xml remote_src=true
+  copy:
+    src: '{{galaxy_config_path}}/tool_data_table_conf.xml.sample'
+    dest: '{{galaxy_config_path}}/tool_data_table_conf.xml'
+    remote_src: yes
+    backup: yes
 
 - name: set fact  
   set_fact:
@@ -12,6 +16,7 @@
     marker: "<!-- {mark} ELIXIR-ITA customization-->"
     insertbefore: "</tables>"
     block: "{{contents}}"
+    backup: yes
   notify:
     - restart galaxy
 
@@ -20,6 +25,7 @@
     src: "{{ item.j2_file }}"
     dest: "{{ galaxy_tool_data_table_conf_path }}/{{ item.loc_file }}"
     force: yes
+    backup: yes
   with_items:
     - { j2_file: "bowtie2_indices.loc.j2", loc_file: "bowtie2_indices.loc" }
     - { j2_file: "bwa_index.loc.j2", loc_file: "bwa_index.loc" }

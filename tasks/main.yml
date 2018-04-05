@@ -1,19 +1,22 @@
 ---
-# Add a fast check to speed reconfiguration
+# Run the role only if galaxy is installed.
 - stat: path='{{ galaxy_install_path }}/run.sh'
   register: galaxy_installed
 
-- include: prerequisites.yml
-  when: galaxy_installed.stat.exists
+# Run the role only if the infrastructure is not locked for this role.
+- stat: path='{{lock_file_path}}/indigo-dc.galaxycloud-refdata.lock'
+  register: refdata_role_locked
 
-#- name: Get missing tool list
-#  include: get-missing-tools-list.yml
-#  when: galaxy_installed.stat.exists and galaxy_flavor != 'galaxy-no-tools'
-#  become_user: '{{ galaxy_user }}'
-#  become: true
+- include: prerequisites.yml
+  when:
+   - galaxy_installed.stat.exists
+   - not refdata_role_locked.stat.exists
 
 - name: Install and Configure Reference Data
   include: install.yml
-  when: galaxy_installed.stat.exists and get_refdata
+  when:
+    - galaxy_installed.stat.exists 
+    - not refdata_role_locked.stat.exists
+    - get_refdata
   become_user: "{{ galaxy_user }}"
   become: true
