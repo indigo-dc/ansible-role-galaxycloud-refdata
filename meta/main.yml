@@ -18,6 +18,7 @@ galaxy_info:
 dependencies:
   - role: indigo-dc.oneclient
     when: refdata_provider_type == 'onedata'
+
   - role: indigo-dc.cvmfs-client
     server_url: '{{ refdata_cvmfs_server_url }}'
     repository_name: '{{ refdata_cvmfs_repository_name }}'
@@ -26,3 +27,8 @@ dependencies:
     proxy_port: '{{ refdata_cvmfs_proxy_port }}'
     cvmfs_mountpoint: '{{ refdata_dir }}'
     when:  refdata_provider_type == 'cvmfs'
+
+  - role: indigo-dc.cvmfs-client
+    repository_name: '{{ refdata_cvmfs_repository_name }}'
+    cvmfs_mountpoint: '{{ refdata_dir }}'
+    when:  refdata_provider_type == 'cvmfs_preconfigured'
