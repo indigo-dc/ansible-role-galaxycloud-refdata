@@ -4,9 +4,10 @@ Reference data ansible role for indigo-dc.galaxycloud.
 The role provider reference data and the corresponding galaxy configuration.
 
 Three reference data source are supported:
-1. cvmfs: CernVM-FS repository is used to provide reference data. It is mounted to ``/refdata``.
-2. onedata: Onedata space hosting reference data is mounted to ``/refdata``.
-3. download: Reference data are downloaded in ``/refdata`` (requires >100GB free space available on /refdata directory).
+1. cvmfs: CernVM-FS repository is used to provide reference data. It is mounted to ``/cvmfs``.
+2. cvmfs_preconfigured: CernVM-FS repository with reference data is mounted using preconfigured config.d file
+3. onedata: Onedata space hosting reference data is mounted to ``/refdata``.
+4. download: Reference data are downloaded in ``/refdata`` (requires >100GB free space available on /refdata directory).
 
 Moreover, this role, exploiting the python library Ephemeris, is able to check which tools have been installed through indigo-dc.galaxy-tools ansible role, and returns
 
@@ -33,6 +34,7 @@ Role Variables
 ``refdata_provider_type``: takes three possible values:
 
   #. ``cvmfs``: CernVM-FS repository with reference data is mounted
+  #. ``cvmfs_preconfigured``: CernVM-FS repository with reference data is mounted using preconfigured config.d file
   #. ``onedata``: Onedata space with reference data is mounted
   #. ``download``: Reference data download
 
@@ -117,6 +119,17 @@ Example Playbook
       refdata_cvmfs_repository_name: 'elixir-italy.galaxy.refdata'
       refdata_cvmfs_key_file: 'elixir-italy.galaxy.refdata.pub'
       refdata_cvmfs_proxy_url: 'DIRECT'
+```
+- Configure Galaxy with CernVM-FS reference data volume with preconfigured config.d files
+```yaml
+- hosts: servers
+  roles:
+    - role: indigo-dc.galaxycloud-refdata
+      galaxy_flavor: 'galaxy-no-tools'
+      get_refdata: true
+      refdata_provider_type: 'cvmfs_preconfigured'
+      refdata_cvmfs_repository_name: 'elixir-italy.galaxy.refdata'
+      refdata_cvmfs_key_file: 'elixir-italy.galaxy.refdata.pub'
 ```
 
 - Configure Galaxy with Onedata space for reference data.

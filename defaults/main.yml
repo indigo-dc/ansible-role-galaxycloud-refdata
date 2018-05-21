@@ -10,7 +10,7 @@ refdata_repository_name: 'elixir-italy.galaxy.refdata'
 #
 # 1. onedata --------------------> Onedata space with reference data is mounted
 # 2. cvmfs ----------------------> CernVM-FS repository with reference data is mounted
-# 3. cvmfs_preconfigured --------> CernVM-FS repository with reference data is mounted using preconfigured conf.d file
+# 3. cvmfs_preconfigured --------> CernVM-FS repository with reference data is mounted using preconfigured config.d file
 # 4. download -------------------> Reference data download
 
 refdata_provider_type: 'cvmfs'
