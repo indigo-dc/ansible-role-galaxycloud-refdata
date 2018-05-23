@@ -9,7 +9,12 @@
 
 - name: Let Galaxy be aware of reference data
   include: locs.yml
+  when: (refdata_provider_type == 'onedata') or (refdata_provider_type == 'download')
 
+- name: Let Galaxy be aware of reference data
+  include: cvmfs_locs.yml
+  when: (refdata_provider_type == 'cvmfs') or (refdata_provider_type == 'cvmfs_preconfigured')
+ 
 # Lock the role to avoid user custom settings rewrite during updates.
 - name: Lock role
   template:

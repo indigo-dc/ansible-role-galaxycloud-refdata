@@ -1,7 +1,16 @@
 ---
+- name: Check galaxyctl
+  command: '{{ galaxyctl_bin_path }}/galaxyctl --version'
+  ignore_errors: true
+  changed_when: false # read-only task
+  register: galaxyctl_is_installed
+  become_user: root
+  become_method: sudo
+
 - name: Set galaxy restart command
   set_fact:
     galaxy_restart: "{{ galaxyctl_bin_path }}/galaxyctl restart galaxy --force"
+  when: galaxyctl_is_installed.rc == 0
 
 #______________________________________
 # Docker restart galaxy only if running.
@@ -11,7 +20,7 @@
   register: galaxy_pid 
   when: ansible_virtualization_type == "docker"
 
-- name: '[Docker] Restart Galaxy'
+- name: '[Docker] Restart Galaxy with galaxyctl'
   command: '{{ galaxy_restart }}'
   ignore_errors: yes
   become_user: root
@@ -19,16 +28,41 @@
   when:
     - ansible_virtualization_type == "docker"
     - galaxy_pid.stat.exists
+    - galaxyctl_is_installed.rc == 0
+
+- name: '[Docker] Restart Galaxy supervisorctl'
+  supervisorctl:
+    name: 'galaxy:'
+    state: started
+  become_user: root
+  become_method: sudo
+  when:
+    - ansible_virtualization_type == "docker"
+    - galaxy_pid.stat.exists
+    - galaxyctl_is_installed.rc != 0
+
 
 #______________________________________
 # VM (always restart galaxy, to ensure it is running).
 
-- name: '[VM] Restart Galaxy'
+- name: '[VM] Restart Galaxy with galaxyctl'
   command: '{{ galaxy_restart }}'
   ignore_errors: yes
   become_user: root
   become_method: sudo
-  when: ansible_virtualization_type != "docker"
+  when:
+    - ansible_virtualization_type != "docker"
+    - galaxyctl_is_installed.rc == 0
+
+- name: '[VM] Restart Galaxy with supervisorctl'
+  supervisorctl:
+    name: 'galaxy:'
+    state: started
+  become_user: root
+  become_method: sudo
+  when:
+    - ansible_virtualization_type != "docker"
+    - galaxyctl_is_installed.rc != 0
 
 - name: '[VM] Check if Galaxy is on line'
   uri:

@@ -24,7 +24,3 @@
 - set_fact:
     galaxyctl_bin_path: '/usr/local/bin'
   when: ansible_os_family == "Debian"
-
-#______________________________________
-# Install Galaxyctl
-#- include: install_galaxyctl.yml
