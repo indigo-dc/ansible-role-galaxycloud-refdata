@@ -7,11 +7,11 @@
   include: refdata-download.yml
   when: refdata_provider_type == 'download'
 
-- name: Let Galaxy be aware of reference data
+- name: '[Onedata/Downlod] Let Galaxy be aware of reference data'
   include: locs.yml
   when: (refdata_provider_type == 'onedata') or (refdata_provider_type == 'download')
 
-- name: Let Galaxy be aware of reference data
+- name: '[CVMFS] Let Galaxy be aware of reference data'
   include: cvmfs_locs.yml
   when: (refdata_provider_type == 'cvmfs') or (refdata_provider_type == 'cvmfs_preconfigured')
  
