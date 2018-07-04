@@ -44,9 +44,9 @@ galaxy_install_path: "{{ galaxy_FS_path }}/{{ galaxy_directory }}"
 # Virtualenv directory
 galaxy_venv_path: "{{ galaxy_install_path }}/.venv"
 
-# Galaxy config/galaxy.ini path
+# Galaxy config/galaxy.yml path
 galaxy_config_path: '{{ galaxy_install_path }}/config'
-galaxy_config_file: '{{ galaxy_config_path }}/galaxy.ini'
+galaxy_config_file: '{{ galaxy_config_path }}/galaxy.yml'
 
 # Galaxy flavor
 galaxy_flavor: 'galaxy-no-tools'
