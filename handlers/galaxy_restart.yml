@@ -9,7 +9,7 @@
 
 - name: Set galaxy restart command
   set_fact:
-    galaxy_restart: "{{ galaxyctl_bin_path }}/galaxyctl restart galaxy --force"
+    galaxy_restart: "{{ galaxyctl_bin_path }}/galaxyctl restart galaxy -c {{ galaxy_config_file }} --force"
   when: galaxyctl_is_installed.rc == 0
 
 #______________________________________
