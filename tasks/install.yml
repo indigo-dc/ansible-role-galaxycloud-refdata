@@ -14,6 +14,9 @@
 - name: Let Galaxy be aware of reference data
   include: cvmfs_locs.yml
   when: (refdata_provider_type == 'cvmfs') or (refdata_provider_type == 'cvmfs_preconfigured')
+
+# Send success mail only if this is the last play, i.e. no tools and no reference data installation.
+- include: send_success_mail.yml
  
 # Lock the role to avoid user custom settings rewrite during updates.
 - name: Lock role
