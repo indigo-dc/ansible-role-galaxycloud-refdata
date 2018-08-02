@@ -57,6 +57,13 @@ galaxy_log_path: "/var/log/galaxy"
 # Galaxy custom configuration files and script path
 galaxy_custom_config_path: '/etc/galaxy'
 galaxy_custom_script_path: '/usr/local/bin'
+custom_utils_path: '{{ galaxy_FS_path }}/.laniakea_utils'
+
+#______________________________________
+# Enable advanced storage configuration
+# If this option is true the configuration is entrusted to indigo-dc.galaxycloud.os
+# This enable galaxy success mail.
+enable_storage_advanced_options: true # curently to True, TO BE removed!
 
 #______________________________________
 # Init system
