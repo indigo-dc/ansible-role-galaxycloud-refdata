@@ -16,5 +16,5 @@
 #________________________________
 # Send mail using preconfigured script from indigo-dc.galaxycloud-os
 
-- name: Send mail to alert user. ONLY FOR TESTING, this is not passing gmail antispam filters
-  command:  '{{ custom_utils_path }}/mail_wrapper.sh html {{ custom_utils_path }}/mail_success.html.j2'
+- name: Send success mail to alert user. ONLY FOR TESTING, this is not passing gmail antispam filters
+  command:  '{{ custom_utils_path }}/mail_wrapper.sh html {{ custom_utils_path }}/mail_success.html'
