@@ -31,7 +31,9 @@
 - meta: flush_handlers
 # Send the notification mail once done
 - include: send_success_mail.yml
-  when: enable_storage_advanced_options|bool
+  when:
+    - ansible_virtualization_type != "docker"
+    - enable_storage_advanced_options|bool
 
 #________________________________
 # Lock the role to avoid user custom settings rewrite during updates.
