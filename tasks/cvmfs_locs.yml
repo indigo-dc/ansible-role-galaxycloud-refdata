@@ -1,4 +1,17 @@
 ---
+- stat:
+    path: '{{ galaxy_config_path }}/tool_data_table_conf.xml'
+  register: register_tool_data_table_conf
+
+- name: Ensure tool_data_table_conf exists
+  copy:
+    src: '{{ galaxy_config_path }}/tool_data_table_conf.xml.sample'
+    dest: '{{ galaxy_config_path }}/tool_data_table_conf.xml'
+    remote_src: true
+  become: true
+  become_user: '{{ galaxy_user}}'
+  when: register_tool_data_table_conf.stat.exists
+
 - name: '[release_17.**] Configure the paths to the tool_data_table_conf.xml'
   ini_file:
     dest: '{{ galaxy_config_file }}'
