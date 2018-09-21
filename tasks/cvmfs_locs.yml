@@ -4,7 +4,7 @@
     dest: '{{ galaxy_config_file }}'
     section: 'app:main'
     option: 'tool_data_table_config_path'
-    value: '{{ refdata_dir }}/{{ refdata_cvmfs_repository_name }}/location/tool_data_table_conf.xml'
+    value: '{{ refdata_dir }}/{{ refdata_cvmfs_repository_name }}/location/tool_data_table_conf.xml,config/tool_data_table_conf.xml'
   when: galaxy_config_file_extension == 'ini'
   notify:
     - restart galaxy
@@ -14,7 +14,7 @@
     dest: '{{ galaxy_config_file }}'
     section: 'app:main'
     option: 'tool_data_table_config_path'
-    value: '/cvmfs/data.galaxyproject.org/byhand/location/tool_data_table_conf.xml,/cvmfs/data.galaxyproject.org/managed/location/tool_data_table_conf.xml'
+    value: '/cvmfs/data.galaxyproject.org/byhand/location/tool_data_table_conf.xml,/cvmfs/data.galaxyproject.org/managed/location/tool_data_table_conf.xml,config/tool_data_table_conf.xml'
   when: (galaxy_config_file_extension == 'ini') and (refdata_cvmfs_repository_name == 'data.galaxyproject.org')
   notify:
     - restart galaxy
@@ -25,7 +25,7 @@
             -c "{{ galaxy_config_file }}"
             -s galaxy
             -o tool_data_table_config_path
-            -v "{{ refdata_dir }}/{{ refdata_cvmfs_repository_name }}/location/tool_data_table_conf.xml"'
+            -v "{{ refdata_dir }}/{{ refdata_cvmfs_repository_name }}/location/tool_data_table_conf.xml,config/tool_data_table_conf.xml"'
   when: galaxy_config_file_extension == 'yml'
   notify:
     - restart galaxy
@@ -36,7 +36,7 @@
             -c "{{ galaxy_config_file }}"
             -s galaxy
             -o tool_data_table_config_path
-            -v "/cvmfs/data.galaxyproject.org/byhand/location/tool_data_table_conf.xml,/cvmfs/data.galaxyproject.org/managed/location/tool_data_table_conf.xml"'
+            -v "/cvmfs/data.galaxyproject.org/byhand/location/tool_data_table_conf.xml,/cvmfs/data.galaxyproject.org/managed/location/tool_data_table_conf.xml,config/tool_data_table_conf.xml"'
   when: (galaxy_config_file_extension == 'yml') and (refdata_cvmfs_repository_name == 'data.galaxyproject.org') 
   notify:
     - restart galaxy
