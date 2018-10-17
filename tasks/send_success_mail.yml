@@ -18,9 +18,12 @@
 
 - name: 'Copy success mail to avoid "does not exist, or is not readable" error'
   copy:
-    src: '{{ custom_utils_path }}/mail_wrapper.yaml'
-    dest: '/tmp/mail_wrapper.yaml'
+    src: '{{ item.src }}'
+    dest: '{{ item.dest }}'
     remote_src: yes
+  with_items:
+    - { src: '{{ custom_utils_path }}/mail_wrapper.yaml', dest: '/tmp/mail_wrapper.yaml' }
+    - { src: '{{ custom_utils_path }}/mail_success.txt', dest: '/tmp/mail_success.txt' }
 
 - name: Send success mail to alert user. ONLY FOR TESTING, this is not passing gmail antispam filters
   include: '/tmp/mail_wrapper.yaml'
