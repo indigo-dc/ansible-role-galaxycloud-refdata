@@ -16,5 +16,11 @@
 #________________________________
 # Send mail using preconfigured script from indigo-dc.galaxycloud-os
 
+- name: 'Copy success mail to avoid "does not exist, or is not readable" error'
+  copy:
+    src: '{{ custom_utils_path }}/mail_wrapper.yaml'
+    dest: '/tmp/mail_wrapper.yaml'
+    remote_src: yes
+
 - name: Send success mail to alert user. ONLY FOR TESTING, this is not passing gmail antispam filters
-  include: '{{ custom_utils_path }}/mail_wrapper.yaml'
+  include: '/tmp/mail_wrapper.yaml'
