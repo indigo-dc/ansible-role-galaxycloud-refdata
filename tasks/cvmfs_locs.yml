@@ -1,55 +1,14 @@
 ---
-- stat:
-    path: '{{ galaxy_config_path }}/tool_data_table_conf.xml'
-  register: register_tool_data_table_conf
-
-- name: Ensure tool_data_table_conf exists
-  copy:
-    src: '{{ galaxy_config_path }}/tool_data_table_conf.xml.sample'
-    dest: '{{ galaxy_config_path }}/tool_data_table_conf.xml'
-    remote_src: true
-  become: true
-  become_user: '{{ galaxy_user}}'
-  when: not register_tool_data_table_conf.stat.exists
-
-- name: '[release_17.**] Configure the paths to the tool_data_table_conf.xml'
-  ini_file:
-    dest: '{{ galaxy_config_file }}'
-    section: 'app:main'
-    option: 'tool_data_table_config_path'
-    value: '{{ refdata_dir }}/{{ refdata_cvmfs_repository_name }}/location/tool_data_table_conf.xml,config/tool_data_table_conf.xml'
-  when: galaxy_config_file_extension == 'ini'
+- name: "Download tool_data_table_conf.xml"
+  get_url:
+    url: '{{ git_tool_data_table_conf_base_url }}/{{ git_tool_data_table_conf_branch }}/{{ refdata_cvmfs_repository_name }}/location/tool_data_table_conf.xml'
+    dest: '{{ galaxy_tool_data_table_conf }}'
+    force: yes
   notify:
     - restart galaxy
 
-- name: '[release_17.**] Configure the paths to the tool_data_table_conf.xml for data.galaxyproject.org'
-  ini_file:
-    dest: '{{ galaxy_config_file }}'
-    section: 'app:main'
-    option: 'tool_data_table_config_path'
-    value: '/cvmfs/data.galaxyproject.org/byhand/location/tool_data_table_conf.xml,/cvmfs/data.galaxyproject.org/managed/location/tool_data_table_conf.xml,config/tool_data_table_conf.xml'
-  when: (galaxy_config_file_extension == 'ini') and (refdata_cvmfs_repository_name == 'data.galaxyproject.org')
-  notify:
-    - restart galaxy
-
-- name: '[release_18.**] Configure the paths to the tool_data_table_conf.xml'
-  command: '{{ galaxy_venv_path }}/bin/python
-            {{ galaxy_custom_script_path }}/parse_galaxy_yaml.py
-            -c "{{ galaxy_config_file }}"
-            -s galaxy
-            -o tool_data_table_config_path
-            -v "{{ refdata_dir }}/{{ refdata_cvmfs_repository_name }}/location/tool_data_table_conf.xml,config/tool_data_table_conf.xml"'
-  when: galaxy_config_file_extension == 'yml'
-  notify:
-    - restart galaxy
-
-- name: '[release_18.**] Configure the paths to the tool_data_table_conf.xml for data.galaxyproject.org'
-  command: '{{ galaxy_venv_path }}/bin/python
-            {{ galaxy_custom_script_path }}/parse_galaxy_yaml.py
-            -c "{{ galaxy_config_file }}"
-            -s galaxy
-            -o tool_data_table_config_path
-            -v "/cvmfs/data.galaxyproject.org/byhand/location/tool_data_table_conf.xml,/cvmfs/data.galaxyproject.org/managed/location/tool_data_table_conf.xml,config/tool_data_table_conf.xml"'
-  when: (galaxy_config_file_extension == 'yml') and (refdata_cvmfs_repository_name == 'data.galaxyproject.org') 
+- name: 'Download the tool_data_table_conf.xml for data.galaxyproject.org'
+  command: 'rsync -avzP rsync://datacache.galaxyproject.org/indexes/location/tool_data_table_conf.xml {{ galaxy_tool_data_table_conf }}'
+  when: refdata_cvmfs_repository_name == 'data.galaxyproject.org'
   notify:
     - restart galaxy

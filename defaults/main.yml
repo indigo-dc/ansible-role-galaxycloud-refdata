@@ -47,6 +47,7 @@ galaxy_venv_path: "{{ galaxy_install_path }}/.venv"
 # Galaxy config/galaxy.yml path
 galaxy_config_path: '{{ galaxy_install_path }}/config'
 galaxy_config_file: '{{ galaxy_config_path }}/galaxy.yml'
+galaxy_tool_data_table_conf: '{{ galaxy_config_path }}/tool_data_table_conf.xml'
 
 # Galaxy flavor
 galaxy_flavor: 'galaxy-no-tools'
@@ -127,3 +128,8 @@ mm9: false # M. musculus (mm8)
 sacCer1: false # S. cerevisiae (sacCer1)
 sacCer2: false # S. cerevisiae (sacCer2)
 sacCer3: true # S. cerevisiae (sacCer3)
+
+
+#________________________________
+git_tool_data_table_conf_base_url: 'https://raw.githubusercontent.com/indigo-dc/Reference-data-galaxycloud-repository'
+git_tool_data_table_conf_branch: 'master'
