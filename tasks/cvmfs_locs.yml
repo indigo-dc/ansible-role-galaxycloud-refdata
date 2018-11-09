@@ -4,11 +4,13 @@
     url: '{{ git_tool_data_table_conf_base_url }}/{{ git_tool_data_table_conf_branch }}/{{ refdata_cvmfs_repository_name }}/location/tool_data_table_conf.xml'
     dest: '{{ galaxy_tool_data_table_conf }}'
     force: yes
+  ignore_errors: true
   notify:
     - restart galaxy
 
 - name: 'Download the tool_data_table_conf.xml for data.galaxyproject.org'
   command: 'rsync -avzP rsync://datacache.galaxyproject.org/indexes/location/tool_data_table_conf.xml {{ galaxy_tool_data_table_conf }}'
   when: refdata_cvmfs_repository_name == 'data.galaxyproject.org'
+  ignore_errors: true
   notify:
     - restart galaxy
