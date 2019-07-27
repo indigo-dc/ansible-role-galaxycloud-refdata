@@ -4,12 +4,12 @@ get_refdata: true
 refdata_dir: "/refdata"
 
 #________________________________
-# Reference data provider type
+# Reference data CernVM-FS configuration
 #
 # 1. cvmfs_preconfigured --------> CernVM-FS repository with reference data is mounted using preconfigured config.d file
 # 2. cvmfs ----------------------> CernVM-FS repository with reference data is mounted
 
-refdata_provider_type: 'cvmfs_preconfigured'
+refdata_cvmfs_configuration: 'cvmfs_preconfigured'
 
 #________________________________
 # Galaxy instance
