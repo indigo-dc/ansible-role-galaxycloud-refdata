@@ -3,8 +3,6 @@ get_refdata: true
 
 refdata_dir: "/refdata"
 
-refdata_repository_name: 'elixir-italy.galaxy.refdata'
-
 #________________________________
 # Reference data provider type
 #
@@ -79,8 +77,8 @@ lock_file_path: '/var/run'
 #________________________________
 # Cvmfs server configuration
 
+refdata_cvmfs_repository_name: 'elixir-italy.galaxy.refdata'
 refdata_cvmfs_server_url: '90.147.102.186' 
-refdata_cvmfs_repository_name: '{{ refdata_repository_name }}'
 refdata_cvmfs_key_file: 'repository_key.pub'
 refdata_cvmfs_proxy_url: '{{ refdata_cvmfs_server_url }}'
 refdata_cvmfs_proxy_port: 80
