@@ -21,19 +21,8 @@
   become_user: "{{ galaxy_user }}"
   become: true
 
-#________________________________
-# Send success mail only if this is the last play,
-# i.e. no tools and no reference data installation.
-# The mail is configured in indigo-dc.galaxycloud-os
-# This task will be moved to a specific post-production role
-
-# Run handlers, causing galaxy start.
+# Lock the role only if this is the last play,
 - meta: flush_handlers
-# Send the notification mail once done
-- include: send_success_mail.yml
-  when:
-    - ansible_virtualization_type != "docker"
-    - enable_storage_advanced_options|bool
 
 #________________________________
 # Lock the role to avoid user custom settings rewrite during updates.

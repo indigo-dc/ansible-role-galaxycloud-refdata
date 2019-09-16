@@ -59,7 +59,6 @@ custom_utils_path: '{{ galaxy_FS_path }}/.laniakea_utils'
 #______________________________________
 # Enable advanced storage configuration
 # If this option is true the configuration is entrusted to indigo-dc.galaxycloud.os
-# This enable galaxy success mail.
 enable_storage_advanced_options: true # curently to True, TO BE removed!
 
 #______________________________________
