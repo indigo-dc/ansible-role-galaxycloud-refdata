@@ -3,17 +3,13 @@ get_refdata: true
 
 refdata_dir: "/refdata"
 
-refdata_repository_name: 'elixir-italy.galaxy.refdata'
-
 #________________________________
-# Reference data provider type
+# Reference data CernVM-FS configuration
 #
-# 1. onedata --------------------> Onedata space with reference data is mounted
+# 1. cvmfs_preconfigured --------> CernVM-FS repository with reference data is mounted using preconfigured config.d file
 # 2. cvmfs ----------------------> CernVM-FS repository with reference data is mounted
-# 3. cvmfs_preconfigured --------> CernVM-FS repository with reference data is mounted using preconfigured config.d file
-# 4. download -------------------> Reference data download
 
-refdata_provider_type: 'cvmfs'
+refdata_cvmfs_configuration: 'cvmfs_preconfigured'
 
 #________________________________
 # Galaxy instance
@@ -63,7 +59,6 @@ custom_utils_path: '{{ galaxy_FS_path }}/.laniakea_utils'
 #______________________________________
 # Enable advanced storage configuration
 # If this option is true the configuration is entrusted to indigo-dc.galaxycloud.os
-# This enable galaxy success mail.
 enable_storage_advanced_options: true # curently to True, TO BE removed!
 
 #______________________________________
@@ -79,26 +74,13 @@ init_type: 'supervisord'
 lock_file_path: '/var/run'
 
 #________________________________
-# OneData configuration
-
-onedatactl_config_file: '{{ galaxy_custom_config_path }}/onedatactl.ini'
-refdata_provider: 'oneprovider2.cloud.ba.infn.it'
-refdata_token: 'MDAxNWxvY2F00aW9uIG9uZXpvbmUKMDAzYmlkZW500aWZpZXIgeExqMi00xdFN3YVp1VWIxM1dFSzRoNEdkb2x3cXVwTnpSaGZONXJSN2tZUQowMDFhY2lkIHRpbWUgPCAxNTI1MzM00NzgyCjAwMmZzaWduYXR1cmUgIOzeMtypO75nZvPJdAocInNbgH9zvJi6ifgXDrFVCr00K'
-refdata_space: '{{ refdata_repository_name }}'
-
-#________________________________
 # Cvmfs server configuration
 
+refdata_cvmfs_repository_name: 'elixir-italy.galaxy.refdata'
 refdata_cvmfs_server_url: '90.147.102.186' 
-refdata_cvmfs_repository_name: '{{ refdata_repository_name }}'
 refdata_cvmfs_key_file: 'repository_key.pub'
 refdata_cvmfs_proxy_url: '{{ refdata_cvmfs_server_url }}'
 refdata_cvmfs_proxy_port: 80
-
-#________________________________
-# Missing tools
-
-galaxy_tools_base_dir: '/tmp'
 
 #________________________________
 # Path
@@ -106,29 +88,6 @@ galaxy_tools_base_dir: '/tmp'
 galaxy_refdata_list_path: '/tmp'
 galaxy_tool_data_table_conf_path: '{{ galaxy_install_path }}/tool-data'
 refdata_log_path: '/var/log/refdata' # WARNING: keep refdata_log_path and refdata_dir with different path, otherwise by mounting onedata space you loose log files!
-
-#________________________________
-# Genome http address (INDIGO_CNR ReCaS Bari Swift container)
-
-refdata_swift_storage_url: 'http://cloud.recas.ba.infn.it:8080/v1/AUTH_3b4918e0a982493e8c3ebcc43586a2a8/test_ref'
-
-#________________________________
-# Genome
-
-at10: false # A. thaliana (TAIR 10)
-at9: false # A. thaliana (TAIR 9)
-dm2: false # D. melanogaster (dm2)
-dm3: false # D. melanogaster (dm3)
-hg18: false # H. sapiens (hg18)
-hg19: false # H. sapiens (hg19)
-hg38: false # H. sapeins (hg38)
-mm10: false # M. musculus (mm10)
-mm8: false # M. musculus (mm9)
-mm9: false # M. musculus (mm8)
-sacCer1: false # S. cerevisiae (sacCer1)
-sacCer2: false # S. cerevisiae (sacCer2)
-sacCer3: true # S. cerevisiae (sacCer3)
-
 
 #________________________________
 git_tool_data_table_conf_base_url: 'https://raw.githubusercontent.com/indigo-dc/Reference-data-galaxycloud-repository'

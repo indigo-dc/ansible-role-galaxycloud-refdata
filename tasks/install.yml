@@ -1,16 +1,3 @@
 ---
-- name: Mount Onedata reference data space
-  include: onedata.yml
-  when: refdata_provider_type == 'onedata'
-
-- name: Download reference data
-  include: refdata-download.yml
-  when: refdata_provider_type == 'download'
-
-- name: '[Onedata/Downlod] Let Galaxy be aware of reference data'
-  include: locs.yml
-  when: (refdata_provider_type == 'onedata') or (refdata_provider_type == 'download')
-
 - name: '[CVMFS] Let Galaxy be aware of reference data'
   include: cvmfs_locs.yml
-  when: (refdata_provider_type == 'cvmfs') or (refdata_provider_type == 'cvmfs_preconfigured')

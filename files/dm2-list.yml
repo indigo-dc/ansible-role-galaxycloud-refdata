@@ -1,7 +1,0 @@
----
-genomes:
-  - genome: 'dm2'
-    tools:
-      - tool: 'liftover'
-        parts:
-          - part: 'dm2ToDm3.over.chain'
