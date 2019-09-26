@@ -1,0 +1,24 @@
+---
+- name: "Download gdc_tool_data_table_conf.xml"
+  get_url:
+    url: '{{ git_tool_data_table_conf_base_url }}/{{ git_tool_data_table_conf_branch }}/{{ refdata_cvmfs_repository_name }}/location/gdc_tool_data_table_conf.xml'
+    dest: '{{ galaxy_config_path }}/gdc_tool_data_table_conf.xml'
+    force: yes
+  ignore_errors: true
+
+- name: '[release_17.**] Configure galaxy.ini file for gdc table'
+  ini_file:
+    dest: '{{ galaxy_config_file }}'
+    section: 'app:main'
+    option: 'tool_data_table_config_path'
+    value: 'config/tool_data_table_conf.xml, config/gdc_tool_data_table_conf.xml'
+  when: galaxy_config_file_extension == 'ini'
+
+- name: '[release_18.**] Configure galaxy.ini file for gdc table'
+  command: '{{ galaxy_venv_path }}/bin/python
+            {{ galaxy_custom_script_path }}/parse_galaxy_yaml.py
+            -c "{{ galaxy_config_file }}"
+            -s galaxy
+            -o tool_data_table_config_path
+            -v "config/tool_data_table_conf.xml, config/gdc_tool_data_table_conf.xml"'
+  when: galaxy_config_file_extension == 'yml'

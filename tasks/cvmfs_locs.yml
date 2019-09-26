@@ -14,3 +14,10 @@
   ignore_errors: true
   notify:
     - restart galaxy
+
+- include: gdc.yml
+  when:
+    - galaxy_flavor == 'galaxy-GDC_Somatic_Variant'
+    - refdata_cvmfs_repository_name == 'data.galaxyproject.org'
+  notify:
+    - restart galaxy 
