@@ -8,12 +8,12 @@
   notify:
     - restart galaxy
 
-#- name: 'Download the tool_data_table_conf.xml for data.galaxyproject.org'
-#  command: 'rsync -avzP rsync://datacache.galaxyproject.org/indexes/location/tool_data_table_conf.xml {{ galaxy_tool_data_table_conf }}'
-#  when: refdata_cvmfs_repository_name == 'data.galaxyproject.org'
-#  ignore_errors: true
-#  notify:
-#    - restart galaxy
+- name: 'Download the tool_data_table_conf.xml for data.galaxyproject.org'
+  command: 'rsync -avzP rsync://datacache.galaxyproject.org/indexes/location/tool_data_table_conf.xml {{ galaxy_tool_data_table_conf }}'
+  when: refdata_cvmfs_repository_name == 'data.galaxyproject.org'
+  ignore_errors: true
+  notify:
+    - restart galaxy
 
 # TODO enable this check always.
 - name: Grant tool data table exists
