@@ -8,10 +8,28 @@
   notify:
     - restart galaxy
 
-- name: 'Download the tool_data_table_conf.xml for data.galaxyproject.org'
-  command: 'rsync -avzP rsync://datacache.galaxyproject.org/indexes/location/tool_data_table_conf.xml {{ galaxy_tool_data_table_conf }}'
+#- name: 'Download the tool_data_table_conf.xml for data.galaxyproject.org'
+#  command: 'rsync -avzP rsync://datacache.galaxyproject.org/indexes/location/tool_data_table_conf.xml {{ galaxy_tool_data_table_conf }}'
+#  when: refdata_cvmfs_repository_name == 'data.galaxyproject.org'
+#  ignore_errors: true
+#  notify:
+#    - restart galaxy
+
+# TODO enable this check always.
+- name: Grant tool data table exists
+  stat:
+    path: '{{ galaxy_tool_data_table_conf }}'
+  register: tool_data_result
   when: refdata_cvmfs_repository_name == 'data.galaxyproject.org'
-  ignore_errors: true
+
+- name: Copy tool data table from cvmfs
+  copy:
+    src: '/cvmfs/data.galaxyproject.org/byhand/location/tool_data_table_conf.xml'
+    dest: '{{ galaxy_tool_data_table_conf }}'
+    remote_src: yes
+  when:
+    - refdata_cvmfs_repository_name == 'data.galaxyproject.org'
+    - tool_data_result.stat.exists == False 
   notify:
     - restart galaxy
 
