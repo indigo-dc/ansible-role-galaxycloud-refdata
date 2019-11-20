@@ -68,8 +68,9 @@ Example Playbook
   roles:
     - role: indigo-dc.galaxycloud-refdata
       galaxy_flavor: 'galaxy-no-tools'
-      get_refdata: true
-      refdata_provider_type: 'cvmfs_preconfigured'
+      get_refdata: 'true'
+      refdata_dir: '/cvmfs'
+      refdata_cvmfs_configuration: 'cvmfs_preconfigured'
       refdata_cvmfs_repository_name: 'elixir-italy.galaxy.refdata'
       refdata_cvmfs_key_file: 'elixir-italy.galaxy.refdata.pub'
 ```
